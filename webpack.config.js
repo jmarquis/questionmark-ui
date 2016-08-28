@@ -1,7 +1,11 @@
 const pkg = require("./package.json");
 const path = require("path");
 
+const src = path.join(__dirname, "src");
+
 module.exports = {
+
+  devtool: "source-map",
 
   resolve: {
 
@@ -15,27 +19,40 @@ module.exports = {
     ],
 
     modules: [
+      path.resolve("./src/components"),
       "node_modules"
     ]
 
   },
 
   entry: [
-    "./src/index.jsx"
+    "./src/index.jsx",
+    "./src/index.html"
   ],
 
-  loaders: [
+  module: {
+    loaders: [
 
-    {
-      test: /\.jsx?$/,
-      exclude: "node_modules",
-      loader: "babel"
-    }
+      {
+        test: /\.html?$/,
+        include: src,
+        loader: "file",
+        query: {
+          name: "[name].[ext]"
+        }
+      },
 
-  ],
+      {
+        test: /\.jsx?$/,
+        include: src,
+        loader: "babel"
+      }
+
+    ]
+  },
 
   output: {
-    path: path.join(__dirname, "./build"),
+    path: path.join(__dirname, "build"),
     filename: pkg.name + ".js"
   }
 
