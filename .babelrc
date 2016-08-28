@@ -1,0 +1,14 @@
+{
+
+  "presets": [
+    "es2015-native-modules",
+    "react"
+  ],
+
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ]
+
+}
