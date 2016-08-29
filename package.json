@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "autoprefixer": "^6.4.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-class-properties": "^6.11.5",
@@ -10,14 +11,22 @@
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.24.0",
     "file-loader": "^0.9.0",
-    "webpack": "^2.1.0-beta.21"
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "postcss-loader": "^0.11.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.1.0-beta.21",
+    "webpack-dev-server": "^2.1.0-beta.0"
   },
   "dependencies": {
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   },
   "scripts": {
-    "build": "./node_modules/.bin/webpack"
+    "build": "./node_modules/.bin/webpack --progress --colors",
+    "clean": "rm -rf build",
+    "start": "./node_modules/.bin/webpack-dev-server --progress --content-base build/ --port 4200 --inline"
   }
 }

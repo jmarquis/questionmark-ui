@@ -31,6 +31,7 @@ module.exports = {
   ],
 
   module: {
+
     loaders: [
 
       {
@@ -46,9 +47,25 @@ module.exports = {
         test: /\.jsx?$/,
         include: src,
         loader: "babel"
+      },
+
+      {
+        test: /\.less$/,
+        include: src,
+        loaders: [
+          "style",
+          "css",
+          "postcss",
+          "less"
+        ]
       }
 
-    ]
+    ],
+
+    postcss: function () {
+      return [require("autoprefixer")]
+    }
+
   },
 
   output: {
