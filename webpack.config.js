@@ -26,6 +26,7 @@ module.exports = {
   },
 
   entry: [
+    "react-hot-loader/patch",
     "./src/index.jsx",
     "./src/index.html"
   ],
@@ -63,7 +64,7 @@ module.exports = {
     ],
 
     postcss: function () {
-      return [require("autoprefixer")]
+      return [require("autoprefixer")];
     }
 
   },

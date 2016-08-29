@@ -16,6 +16,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "postcss-loader": "^0.11.0",
+    "react-hot-loader": "^3.0.0-beta.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.1.0-beta.21",
     "webpack-dev-server": "^2.1.0-beta.0"
@@ -27,6 +28,6 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack --progress --colors",
     "clean": "rm -rf build",
-    "start": "./node_modules/.bin/webpack-dev-server --progress --content-base build/ --port 4200 --inline"
+    "start": "./node_modules/.bin/webpack-dev-server --progress --content-base build/ --port 4200 --inline --hot"
   }
 }
