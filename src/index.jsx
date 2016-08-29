@@ -1,28 +1,44 @@
-import "./base.less";
+import "./base.less"
 
-import { AppContainer } from "react-hot-loader";
-import React from "react";
-import { render } from "react-dom";
+import { AppContainer } from "react-hot-loader"
+import React from "react"
+import { render } from "react-dom"
+import { createStore, combineReducers, applyMiddleware } from "redux"
+import thunk from "redux-thunk"
+import createLogger from "redux-logger"
 
-import App from "App";
+import Root from "Root"
+import * as reducers from "./reducers"
+
+const store = createStore(
+  combineReducers(reducers),
+  applyMiddleware(
+    thunk,
+    createLogger({
+      level: "info",
+      collapsed: true,
+      diff: true
+    })
+  )
+)
 
 const rootEl = document.getElementById("root")
 
 render(
   <AppContainer>
-    <App />
+    <Root store={store} />
   </AppContainer>,
   rootEl
-);
+)
 
 if (module.hot) {
-  module.hot.accept("./components/App", () => {
-    const HotApp = require("App").default;
+  module.hot.accept("./components/Root", () => {
+    const HotRoot = require("Root").default
     render(
       <AppContainer>
-        <HotApp />
+        <HotRoot store={store} />
       </AppContainer>,
       rootEl
-    );
+    )
   })
 }

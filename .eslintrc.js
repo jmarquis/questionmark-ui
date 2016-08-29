@@ -1,3 +1,117 @@
 module.exports = {
 
+  parser: "babel-eslint",
+
+  plugins: [
+    "react"
+  ],
+
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+
+  env: {
+    browser: true,
+    es6: true,
+    node: true
+  },
+
+  globals: {
+  },
+
+  rules: {
+
+    "arrow-spacing": "warn",
+    "block-spacing": "warn",
+    "brace-style": "warn",
+    "camelcase": "warn",
+    "comma-spacing": "warn",
+    "computed-property-spacing": "warn",
+    "consistent-this": ["warn", "USE AN ARROW FUNCTION"],
+    "eol-last": "error",
+    "eqeqeq": "warn",
+    "indent": ["warn", 2, { SwitchCase: 1 }],
+    "key-spacing": "warn",
+    "keyword-spacing": "warn",
+    "linebreak-style": "warn",
+    "max-params": "warn",
+    "max-statements-per-line": "warn",
+    "new-cap": "warn",
+    "no-array-constructor": "warn",
+    "no-bitwise": "warn",
+    "no-duplicate-imports": "warn",
+    "no-empty-function": "warn",
+    "no-eq-null": "warn",
+    "no-eval": "warn",
+    "no-extend-native": "warn",
+    "no-extra-bind": "warn",
+    "no-extra-parens": "warn",
+    "no-implied-eval": "warn",
+    "no-labels": "warn",
+    "no-lone-blocks": "warn",
+    "no-lonely-if": "warn",
+    "no-magic-numbers": ["warn", { ignore: [0, 1, 100], ignoreArrayIndexes: true }],
+    "no-mixed-operators": "warn",
+    "no-mixed-spaces-and-tabs": "warn",
+    "no-multi-spaces": "warn",
+    "no-multi-str": "warn",
+    "no-multiple-empty-lines": "warn",
+    "no-native-reassign": "warn",
+    "no-nested-ternary": "warn",
+    "no-new-func": "warn",
+    "no-new-object": "warn",
+    "no-new-wrappers": "warn",
+    "no-param-reassign": "warn",
+    "no-proto": "warn",
+    "no-return-assign": "warn",
+    "no-script-url": "warn",
+    "no-self-compare": "warn",
+    "no-sequences": "warn",
+    "no-spaced-func": "warn",
+    "no-trailing-spaces": "warn",
+    "no-underscore-dangle": "warn",
+    "no-unmodified-loop-condition": "warn",
+    "no-unneeded-ternary": "warn",
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn",
+    "no-use-before-define": "warn",
+    "no-useless-call": "warn",
+    "no-useless-escape": "warn",
+    "no-var": "warn",
+    "no-void": "warn",
+    "no-whitespace-before-property": "warn",
+    "no-with": "warn",
+    "object-shorthand": "warn",
+    "prefer-arrow-callback": "warn",
+    "prefer-const": "warn",
+    "prefer-rest-params": "warn",
+    "prefer-spread": "warn",
+    "prefer-template": "warn",
+    "rest-spread-spacing": "warn",
+    "semi-spacing": "warn",
+    "semi": ["warn", "never"],
+    "space-before-function-paren": ["warn", { anonymous: "always", named: "never" }],
+    "space-in-parens": "warn",
+    "space-infix-ops": "warn",
+    "space-unary-ops": "warn",
+    "wrap-iife": "warn",
+    "yoda": "warn",
+
+    "react/jsx-closing-bracket-location": "warn",
+    "react/jsx-equals-spacing": "warn",
+    "react/jsx-filename-extension": "warn",
+    "react/jsx-handler-names": "warn",
+    "react/jsx-indent-props": ["warn", 2],
+    "react/jsx-indent": ["warn", 2],
+    "react/jsx-key": "error",
+    "react/jsx-max-props-per-line": ["warn", { maximum: 3 }],
+    "react/jsx-pascal-case": "warn",
+    "react/jsx-space-before-closing": "warn",
+    "react/no-multi-comp": "warn",
+    "react/prefer-es6-class": "warn",
+    "react/prop-types": "warn"
+
+  }
+
 };

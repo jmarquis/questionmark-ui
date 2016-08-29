@@ -1,7 +1,7 @@
-const pkg = require("./package.json");
-const path = require("path");
+const pkg = require("./package.json")
+const path = require("path")
 
-const src = path.join(__dirname, "src");
+const src = path.join(__dirname, "src")
 
 module.exports = {
 
@@ -63,15 +63,15 @@ module.exports = {
 
     ],
 
-    postcss: function () {
-      return [require("autoprefixer")];
+    postcss() {
+      return [require("autoprefixer")]
     }
 
   },
 
   output: {
     path: path.join(__dirname, "build"),
-    filename: pkg.name + ".js"
+    filename: `${pkg.name}.js`
   }
 
 }
