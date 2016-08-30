@@ -1,0 +1,11 @@
+@import "../../styles/colors";
+
+.ListItem {
+  background-color: @base-background;
+  border: 1px solid @panel-border;
+  border-radius: 5px;
+
+  & + .ListItem {
+    margin-top: 10px;
+  }
+}

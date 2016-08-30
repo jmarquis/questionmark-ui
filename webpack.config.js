@@ -20,6 +20,7 @@ module.exports = {
 
     modules: [
       path.resolve("./src/components"),
+      path.resolve("./src/styles"),
       "node_modules"
     ]
 
@@ -63,10 +64,10 @@ module.exports = {
 
     ],
 
-    postcss() {
-      return [require("autoprefixer")]
-    }
+  },
 
+  postcss() {
+    return [require("autoprefixer")]
   },
 
   output: {
