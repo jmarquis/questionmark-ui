@@ -1,13 +1,17 @@
 import "./ListItem.less"
 
-import React, { Component } from "react"
+import React, { Component, PropTypes } from "react"
 
 export default class ListItem extends Component {
+
+  static propTypes = {
+    title: PropTypes.string
+  }
 
   render() {
     return (
       <div className="ListItem">
-        list item
+        {this.props.title}
       </div>
     )
   }
