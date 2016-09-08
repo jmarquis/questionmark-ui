@@ -8,7 +8,7 @@ export default class List extends Component {
 
   static propTypes = {
     title: PropTypes.string,
-    items: PropTypes.array
+    cards: PropTypes.array
   }
 
   render() {
@@ -19,8 +19,8 @@ export default class List extends Component {
         </header>
         <div>
           {
-            this.props.items.map(item => {
-              return <ListItem key={item.id} title={item.title} />
+            this.props.cards.map(card => {
+              return <ListItem key={card.id} title={card.title} />
             })
           }
         </div>

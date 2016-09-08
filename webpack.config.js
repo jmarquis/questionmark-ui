@@ -29,6 +29,7 @@ module.exports = {
 
   entry: [
     "react-hot-loader/patch",
+    "whatwg-fetch",
     "./src/index.jsx",
     "./src/index.html"
   ],
