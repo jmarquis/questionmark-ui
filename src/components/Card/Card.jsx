@@ -1,8 +1,8 @@
-import "./ListItem.less"
+import "./Card.less"
 
 import React, { Component, PropTypes } from "react"
 
-export default class ListItem extends Component {
+export default class Card extends Component {
 
   static propTypes = {
     title: PropTypes.string
@@ -10,8 +10,8 @@ export default class ListItem extends Component {
 
   render() {
     return (
-      <div className="ListItem">
-        {this.props.title}
+      <div className="Card">
+        {this.props.title}ssss
       </div>
     )
   }
