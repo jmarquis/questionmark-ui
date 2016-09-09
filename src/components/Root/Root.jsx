@@ -3,6 +3,7 @@ import { Provider } from "react-redux"
 import { Router, Route, browserHistory } from "react-router"
 
 import App from "App"
+import Project from "Project"
 
 export default class Root extends Component {
 
@@ -14,7 +15,9 @@ export default class Root extends Component {
     return (
       <Provider store={this.props.store}>
         <Router history={browserHistory}>
-          <Route path="/" component={App} />
+          <Route path="/" component={App}>
+            <Route path="projects/:projectId" component={Project} />
+          </Route>
         </Router>
       </Provider>
     )

@@ -1,11 +1,15 @@
 import "./App.less"
 
-import React, { Component } from "react"
+import React, { Component, PropTypes } from "react"
 
 import ProjectList from "ProjectList"
 import Project from "Project"
 
 export default class App extends Component {
+
+  static propTypes = {
+    children: PropTypes.object
+  }
 
   render() {
     return (
@@ -13,7 +17,7 @@ export default class App extends Component {
         <header></header>
         <div>
           <ProjectList />
-          <Project />
+          {this.props.children}
         </div>
       </div>
     )

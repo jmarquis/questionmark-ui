@@ -18,12 +18,13 @@ export default class Project extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    lists: PropTypes.array
+    lists: PropTypes.array,
+    routeParams: PropTypes.object
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchLists(1))
+    const { dispatch, routeParams } = this.props
+    dispatch(fetchLists(routeParams.projectId))
   }
 
   render() {
