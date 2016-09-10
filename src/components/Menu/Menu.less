@@ -3,15 +3,18 @@
 .Menu {
   background-color: @menu-background;
   color: @inverted-text;
+  display: flex;
+  flex-flow: column nowrap;
 
   > header {
-    padding: 15px 30px;
-    margin: 15px 0 0;
+    flex: none;
+    padding: 30px 30px 15px;
     font-size: 1.25em;
     font-weight: 600;
   }
 
   > ul {
+    flex: auto;
     list-style: none;
     margin: 0;
     padding: 15px 30px;
@@ -36,6 +39,22 @@
           color: @white;
         }
       }
+    }
+  }
+
+  > footer {
+    flex: none;
+    padding: 15px 30px 30px;
+    display: flex;
+    align-items: center;
+
+    > figure {
+      flex: none;
+      width: 40px;
+      height: 40px;
+      margin: 0 12px 0 0;
+      border-radius: 40px;
+      background-color: #fff;
     }
   }
 }
