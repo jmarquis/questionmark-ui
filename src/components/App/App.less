@@ -2,29 +2,15 @@
 
 #App {
   display: flex;
-  flex-flow: column nowrap;
   width: 100vw;
   height: 100vh;
 
-  > header {
+  > .Menu {
     flex: none;
-    height: 60px;
-    background-color: @primary;
+    width: 250px;
   }
 
-  > div {
+  > .Project {
     flex: auto;
-    display: flex;
-
-    > .ProjectList {
-      flex: none;
-      width: 250px;
-      background-color: @panel-background;
-      box-shadow: inset -1px 0 @panel-border;
-    }
-
-    > .Project {
-      flex: auto;
-    }
   }
 }

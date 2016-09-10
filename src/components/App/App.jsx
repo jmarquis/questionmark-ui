@@ -2,8 +2,7 @@ import "./App.less"
 
 import React, { Component, PropTypes } from "react"
 
-import ProjectList from "ProjectList"
-import Project from "Project"
+import Menu from "Menu"
 
 export default class App extends Component {
 
@@ -14,11 +13,8 @@ export default class App extends Component {
   render() {
     return (
       <div id="App">
-        <header></header>
-        <div>
-          <ProjectList />
-          {this.props.children}
-        </div>
+        <Menu />
+        {this.props.children}
       </div>
     )
   }
