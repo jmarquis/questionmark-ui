@@ -12,10 +12,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <div id="App">
+      <main id="App">
         <Menu />
         {this.props.children}
-      </div>
+      </main>
     )
   }
 
