@@ -7,31 +7,37 @@ import { fetchLists } from "actions/lists"
 
 import List from "List"
 
-@connect(state => {
+@connect((state, ownProps) => {
   const { dispatch, lists } = state
+  const { projectId } = ownProps.routeParams
   return {
     dispatch,
-    lists
+    lists,
+    projectId
   }
 })
 export default class Project extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    lists: PropTypes.array,
-    routeParams: PropTypes.object
+    lists: PropTypes.object,
+    projectId: PropTypes.string
   }
 
-  componentDidMount() {
-    const { dispatch, routeParams } = this.props
-    dispatch(fetchLists(routeParams.projectId))
+  componentWillUpdate(nextProps) {
+    if (this.props.projectId !== nextProps.projectId) {
+      const { dispatch, projectId } = nextProps
+      dispatch(fetchLists(projectId))
+    }
   }
 
   render() {
+    const { projectId } = this.props
+    if (!this.props.lists[projectId]) return null
     return (
       <div className="Project">
         {
-          this.props.lists.map(list => {
+          this.props.lists[projectId].map(list => {
             return <List key={list.id} title={list.title} cards={list.cards} />
           })
         }
