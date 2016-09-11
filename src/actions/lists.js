@@ -1,6 +1,4 @@
-import "whatwg-fetch"
-
-import { api } from "config"
+import fetchJson from "../etc/fetchJson"
 
 function updateLists({ lists, projectId }) {
   return {
@@ -12,9 +10,7 @@ function updateLists({ lists, projectId }) {
 
 export function fetchLists(projectId) {
   return dispatch => {
-    fetch(`${api.host}/projects/${projectId}/lists`).then(response => {
-      return response.json()
-    }).then(lists => {
+    fetchJson(`projects/${projectId}/lists`).then(lists => {
       dispatch(updateLists({ lists, projectId }))
     })
   }

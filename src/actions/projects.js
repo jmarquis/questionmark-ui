@@ -1,7 +1,5 @@
-import "whatwg-fetch"
-import { push } from "react-router-redux"
-
-import { api } from "config"
+import { goto } from "../etc/nav"
+import fetchJson from "../etc/fetchJson"
 
 function updateProjects(projects) {
   return (dispatch, getState) => {
@@ -10,16 +8,14 @@ function updateProjects(projects) {
       projects
     })
     if (getState().routing.locationBeforeTransitions.pathname === "/") {
-      dispatch(push(`/projects/${projects[0].id}`))
+      goto(`/projects/${projects[0].id}`)
     }
   }
 }
 
 export function fetchProjects() {
   return dispatch => {
-    fetch(`${api.host}/projects`).then(response => {
-      return response.json()
-    }).then(projects => {
+    fetchJson("projects").then(projects => {
       dispatch(updateProjects(projects))
     })
   }
