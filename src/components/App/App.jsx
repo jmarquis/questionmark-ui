@@ -7,7 +7,8 @@ import Menu from "Menu"
 export default class App extends Component {
 
   static propTypes = {
-    children: PropTypes.object
+    children: PropTypes.object,
+    location: PropTypes.object
   }
 
   render() {

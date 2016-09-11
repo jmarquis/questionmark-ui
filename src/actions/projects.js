@@ -1,11 +1,17 @@
 import "whatwg-fetch"
+import { push } from "react-router-redux"
 
 import { api } from "config"
 
 function updateProjects(projects) {
-  return {
-    type: "UPDATE_PROJECTS",
-    projects
+  return (dispatch, getState) => {
+    dispatch({
+      type: "UPDATE_PROJECTS",
+      projects
+    })
+    if (getState().routing.locationBeforeTransitions.pathname === "/") {
+      dispatch(push(`/projects/${projects[0].id}`))
+    }
   }
 }
 

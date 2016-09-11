@@ -3,30 +3,22 @@ import "base"
 import { AppContainer } from "react-hot-loader"
 import React from "react"
 import { render } from "react-dom"
-import { createStore, combineReducers, applyMiddleware } from "redux"
-import thunk from "redux-thunk"
-import createLogger from "redux-logger"
+import { browserHistory } from "react-router"
+import { syncHistoryWithStore } from "react-router-redux"
 
 import Root from "Root"
-import * as reducers from "./reducers"
 
-const store = createStore(
-  combineReducers(reducers),
-  applyMiddleware(
-    thunk,
-    createLogger({
-      level: "info",
-      collapsed: true,
-      diff: true
-    })
-  )
-)
+import configureStore from "./config/configureStore"
+
+const store = configureStore(browserHistory)
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 const rootEl = document.getElementById("root")
 
 render(
   <AppContainer>
-    <Root store={store} />
+    <Root store={store} history={history} />
   </AppContainer>,
   rootEl
 )
@@ -36,7 +28,7 @@ if (module.hot) {
     const HotRoot = require("Root").default
     render(
       <AppContainer>
-        <HotRoot store={store} />
+        <HotRoot store={store} history={history} />
       </AppContainer>,
       rootEl
     )

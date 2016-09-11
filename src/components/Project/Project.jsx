@@ -3,9 +3,9 @@ import "./Project.less"
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 
-import List from "List"
-
 import { fetchLists } from "actions/lists"
+
+import List from "List"
 
 @connect(state => {
   const { dispatch, lists } = state

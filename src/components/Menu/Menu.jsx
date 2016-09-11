@@ -3,15 +3,16 @@ import "./Menu.less"
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 
-import NavLink from "NavLink"
-
 import { fetchProjects } from "../../actions/projects"
 
+import NavLink from "NavLink"
+
 @connect(state => {
-  const { dispatch, projects } = state
+  const { dispatch, projects, routing } = state
   return {
     dispatch,
-    projects
+    projects,
+    routing
   }
 })
 export default class Menu extends Component {
