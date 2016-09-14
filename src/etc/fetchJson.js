@@ -3,11 +3,16 @@ import "whatwg-fetch"
 import api from "../config/api"
 import { goto } from "../etc/nav"
 
-export default function fetchJson(path, ...args) {
+export default function fetchJson(path, options) {
   return new Promise((resolve, reject) => {
     fetch(`${api.host}/${path}`, {
       credentials: "include",
-      ...args
+      mode: "cors",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      ...options
     }).then(response => {
       if (response.status >= 200 && response.status < 300) {
         return response

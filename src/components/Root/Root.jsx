@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from "react"
 import { Provider } from "react-redux"
-import { Router, Route } from "react-router"
+import { Router } from "react-router"
 
-import App from "App"
-import Project from "Project"
+import routes from "../../config/routes"
 
 export default class Root extends Component {
 
@@ -16,11 +15,7 @@ export default class Root extends Component {
     return (
       <Provider store={this.props.store}>
         <Router history={this.props.history}>
-          <Route path="/" component={App}>
-            <Route path="projects">
-              <Route path=":projectId" component={Project} />
-            </Route>
-          </Route>
+          {routes}
         </Router>
       </Provider>
     )
