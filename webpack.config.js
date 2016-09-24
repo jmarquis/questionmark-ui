@@ -1,5 +1,6 @@
 const pkg = require("./package.json")
 const path = require("path")
+const webpack = require("webpack")
 
 const src = path.join(__dirname, "src")
 
@@ -10,7 +11,6 @@ module.exports = {
   resolve: {
 
     extensions: [
-      "",
       ".js",
       ".jsx",
       ".less",
@@ -36,13 +36,13 @@ module.exports = {
 
   module: {
 
-    loaders: [
+    rules: [
 
       {
         test: /\.html?$/,
         include: src,
-        loader: "file",
-        query: {
+        use: "file",
+        options: {
           name: "[name].[ext]"
         }
       },
@@ -50,13 +50,13 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: src,
-        loader: "babel"
+        use: "babel"
       },
 
       {
         test: /\.less$/,
         include: src,
-        loaders: [
+        use: [
           "style",
           "css",
           "postcss",
@@ -68,13 +68,17 @@ module.exports = {
 
   },
 
-  postcss() {
-    return [require("autoprefixer")]
-  },
-
   output: {
     path: path.join(__dirname, "build"),
     filename: `${pkg.name}.js`
-  }
+  },
+
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      postcss() {
+        return [require("autoprefixer")]
+      }
+    })
+  ]
 
 }
