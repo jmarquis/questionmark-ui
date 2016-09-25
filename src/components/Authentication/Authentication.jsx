@@ -2,16 +2,31 @@ import "./Authentication.less"
 
 import React, { Component } from "react"
 
-import fetchJson from "../../etc/fetchJson"
+import { authenticate, isAuthenticated } from "../../etc/auth"
+import { goto } from "../../etc/nav"
 
 export default class Authentication extends Component {
 
   state = {
+    checkComplete: false,
     email: "",
     password: ""
   }
 
+  componentDidMount() {
+    isAuthenticated()
+      .then(this.handleAuthenticated)
+      .catch(() => {
+        this.setState({
+          checkComplete: true
+        })
+      })
+  }
+
   render() {
+
+    if (!this.state.checkComplete) return null
+
     return (
       <div className="Authentication">
         <form onSubmit={this.handleSubmit}>
@@ -21,6 +36,7 @@ export default class Authentication extends Component {
         </form>
       </div>
     )
+
   }
 
   handleEmailChange = (event) => {
@@ -38,13 +54,17 @@ export default class Authentication extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const { email, password } = this.state
-    fetchJson("sessions", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password
-      })
-    })
+    authenticate({ email, password })
+      .then(this.handleAuthenticated)
+      .catch(this.handleAuthenticationError)
+  }
+
+  handleAuthenticated = () => {
+    goto("/projects/1")
+  }
+
+  handleAuthenticationError = error => {
+    alert(error)
   }
 
 }

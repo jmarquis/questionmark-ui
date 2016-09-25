@@ -1,11 +1,11 @@
 import "whatwg-fetch"
 
-import api from "../config/api"
+import server from "../config/server"
 import { goto } from "../etc/nav"
 
-export default function fetchJson(path, options) {
+export function requestRaw(path, options) {
   return new Promise((resolve, reject) => {
-    fetch(`${api.host}/${path}`, {
+    fetch(`${server.host}/${path}`, {
       credentials: "include",
       mode: "cors",
       headers: {
@@ -20,14 +20,20 @@ export default function fetchJson(path, options) {
         throw new Error(response.status)
       }
     }).then(response => {
-      return response.json()
-    }).then(json => {
-      resolve(json)
+      resolve(response)
     }).catch(error => {
       if (error.message === "403") {
         goto("/")
       }
       reject(error.message)
     })
+  })
+}
+
+export default function request(path, options) {
+  return new Promise((resolve, reject) => {
+    requestRaw(path, options).then(response => {
+      return response.json()
+    }).then(resolve).catch(reject)
   })
 }

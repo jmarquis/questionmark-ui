@@ -1,8 +1,10 @@
 import "./App.less"
 
 import React, { Component, PropTypes } from "react"
+import { Match } from "react-router"
 
 import Menu from "Menu"
+import Authentication from "Authentication"
 
 export default class App extends Component {
 
@@ -15,7 +17,7 @@ export default class App extends Component {
     return (
       <main id="App">
         <Menu />
-        {this.props.children}
+        <Match exactly pattern="" component={Authentication} />
       </main>
     )
   }
