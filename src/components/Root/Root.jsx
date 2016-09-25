@@ -1,21 +1,21 @@
 import React, { Component, PropTypes } from "react"
 import { Provider } from "react-redux"
-import { Router } from "react-router"
+import { Match } from "react-router"
 
-import routes from "../../config/routes"
+import Router from "Router"
+import App from "App"
 
 export default class Root extends Component {
 
   static propTypes = {
     store: PropTypes.object,
-    history: PropTypes.object
   }
 
   render() {
     return (
       <Provider store={this.props.store}>
-        <Router history={this.props.history}>
-          {routes}
+        <Router>
+          <Match pattern="/" component={App} />
         </Router>
       </Provider>
     )

@@ -8,11 +8,11 @@ import { fetchProjects } from "../../actions/projects"
 import NavLink from "NavLink"
 
 @connect(state => {
-  const { dispatch, projects, routing } = state
+  const { dispatch, projects, location } = state
   return {
     dispatch,
     projects,
-    routing
+    location
   }
 })
 export default class Menu extends Component {

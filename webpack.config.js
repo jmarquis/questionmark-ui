@@ -43,7 +43,7 @@ module.exports = {
         include: src,
         use: "file",
         options: {
-          name: "[name].[ext]"
+          name: "index.html"
         }
       },
 
