@@ -18,13 +18,24 @@ export function authenticate({ email, password }) {
 
 export function isAuthenticated() {
   return new Promise((resolve, reject) => {
-    requestRaw("sessions")
-      .then(() => {
-        resolve()
-      })
-      .catch((error) => {
-        alert(error)
-        reject()
-      })
+    requestRaw("sessions").then(() => {
+      resolve()
+    }).catch((error) => {
+      alert(error)
+      reject()
+    })
+  })
+}
+
+export function resetAuthentication() {
+  return new Promise((resolve, reject) => {
+    requestRaw("sessions", {
+      method: "DELETE"
+    }).then(() => {
+      resolve()
+    }).catch(error => {
+      alert(error)
+      reject()
+    })
   })
 }
