@@ -20,8 +20,7 @@ export function isAuthenticated() {
   return new Promise((resolve, reject) => {
     requestRaw("sessions").then(() => {
       resolve()
-    }).catch((error) => {
-      alert(error)
+    }).catch(() => {
       reject()
     })
   })
@@ -33,8 +32,7 @@ export function resetAuthentication() {
       method: "DELETE"
     }).then(() => {
       resolve()
-    }).catch(error => {
-      alert(error)
+    }).catch(() => {
       reject()
     })
   })

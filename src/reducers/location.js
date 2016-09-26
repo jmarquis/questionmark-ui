@@ -11,6 +11,7 @@ export function location(state = getDefaultLocation(), action) {
   switch (action.type) {
 
     case "LOCATION_CHANGE":
+      console.log("action")
       return {
         ...getDefaultLocation(),
         ...action.location

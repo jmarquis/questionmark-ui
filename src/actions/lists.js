@@ -1,4 +1,4 @@
-import fetchJson from "../etc/fetchJson"
+import request from "../etc/api"
 
 function updateLists({ lists, projectId }) {
   return {
@@ -10,7 +10,7 @@ function updateLists({ lists, projectId }) {
 
 export function fetchLists(projectId) {
   return dispatch => {
-    fetchJson(`projects/${projectId}/lists`).then(lists => {
+    request(`projects/${projectId}/lists`).then(lists => {
       dispatch(updateLists({ lists, projectId }))
     })
   }

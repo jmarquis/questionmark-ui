@@ -26,6 +26,7 @@ export default class Router extends Component {
 
   handleLocationChange = location => {
     const { dispatch } = this.props
+    console.log("event")
     dispatch({
       type: "LOCATION_CHANGE",
       location

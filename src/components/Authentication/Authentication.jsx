@@ -2,7 +2,7 @@ import "./Authentication.less"
 
 import React, { Component } from "react"
 
-import { authenticate, isAuthenticated } from "../../etc/auth"
+import { authenticate, isAuthenticated, resetAuthentication } from "../../etc/auth"
 import { goto } from "../../etc/nav"
 
 export default class Authentication extends Component {
@@ -14,18 +14,18 @@ export default class Authentication extends Component {
   }
 
   componentDidMount() {
-    isAuthenticated()
-      .then(this.handleAuthenticated)
-      .catch(() => {
+    resetAuthentication().then(() => {
+      isAuthenticated().then(this.handleAuthenticated).catch(() => {
         this.setState({
           checkComplete: true
         })
       })
+    })
   }
 
   render() {
 
-    if (!this.state.checkComplete) return null
+    if (!this.state.checkComplete) return <div>loading</div>
 
     return (
       <div className="Authentication">
@@ -60,10 +60,12 @@ export default class Authentication extends Component {
   }
 
   handleAuthenticated = () => {
+    console.log("done!")
     goto("/projects/1")
   }
 
   handleAuthenticationError = error => {
+    console.log("fail!")
     alert(error)
   }
 

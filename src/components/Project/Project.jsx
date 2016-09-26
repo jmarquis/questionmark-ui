@@ -9,7 +9,7 @@ import List from "List"
 
 @connect((state, ownProps) => {
   const { dispatch, lists } = state
-  const { projectId } = ownProps.routeParams
+  const { projectId } = ownProps.params
   return {
     dispatch,
     lists,
