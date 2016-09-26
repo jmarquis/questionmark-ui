@@ -5,6 +5,9 @@ import React, { Component } from "react"
 import { authenticate, isAuthenticated, resetAuthentication } from "../../etc/auth"
 import { goto } from "../../etc/nav"
 
+import Fieldset from "Fieldset"
+import TextInput from "TextInput"
+
 export default class Authentication extends Component {
 
   state = {
@@ -30,8 +33,10 @@ export default class Authentication extends Component {
     return (
       <div className="Authentication">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange} />
-          <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
+          <Fieldset>
+            <TextInput name="email" value={this.state.email} onChange={this.handleEmailChange} />
+            <TextInput type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
+          </Fieldset>
           <input type="submit" value="Sign in" />
         </form>
       </div>
@@ -60,12 +65,10 @@ export default class Authentication extends Component {
   }
 
   handleAuthenticated = () => {
-    console.log("done!")
     goto("/projects/1")
   }
 
   handleAuthenticationError = error => {
-    console.log("fail!")
     alert(error)
   }
 
