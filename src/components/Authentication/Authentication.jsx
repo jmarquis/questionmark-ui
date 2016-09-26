@@ -7,6 +7,7 @@ import { goto } from "../../etc/nav"
 
 import Fieldset from "Fieldset"
 import TextInput from "TextInput"
+import Button from "Button"
 
 export default class Authentication extends Component {
 
@@ -37,7 +38,7 @@ export default class Authentication extends Component {
             <TextInput name="email" value={this.state.email} onChange={this.handleEmailChange} />
             <TextInput type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
           </Fieldset>
-          <input type="submit" value="Sign in" />
+          <Button type="submit" text="Sign in" />
         </form>
       </div>
     )
