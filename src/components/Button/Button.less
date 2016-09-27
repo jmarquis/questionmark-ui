@@ -1,8 +1,7 @@
 @import "../../styles/colors";
 
 .Button {
-  width: 300px;
-  height: 60px;
+  height: 40px;
   background-color: @cta;
   border: 0;
   color: @panel-border;
@@ -14,8 +13,20 @@
   cursor: pointer;
   outline: 0;
 
+  &.large {
+    height: 60px;
+  }
+
   &:hover {
     background-color: mix(#fff, @cta, 10%);
+  }
+
+  .dark & {
+    background-color: @cta-light;
+
+    &:hover {
+      background-color: mix(#fff, @cta-light, 10%);
+    }
   }
 
   &.secondary {

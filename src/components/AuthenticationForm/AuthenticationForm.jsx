@@ -28,7 +28,11 @@ export default class AuthenticationForm extends Component {
             onChange={this.handlePasswordChange}
           />
         </Fieldset>
-        <Button type="submit" text="Sign in" />
+        <Button
+          type="submit"
+          size="large"
+          text="Sign in"
+        />
       </Form>
     )
   }

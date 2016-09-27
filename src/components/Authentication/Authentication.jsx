@@ -26,7 +26,7 @@ export default class Authentication extends Component {
   render() {
     if (!this.state.checkComplete) return <div>loading</div>
     return (
-      <div className="Authentication">
+      <div className="Authentication dark">
         <figure></figure>
         <AuthenticationForm />
       </div>

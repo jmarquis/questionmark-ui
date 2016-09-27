@@ -12,6 +12,15 @@
   outline: 0;
   margin: 20px;
 
+  .dark & {
+    background-color: @panel-border;
+    border-color: @border;
+
+    &:focus {
+      background-color: @white;
+    }
+  }
+
   &::placeholder {
     color: @label-color;
   }
