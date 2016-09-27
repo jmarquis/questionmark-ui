@@ -5,16 +5,12 @@ import React, { Component } from "react"
 import { authenticate, isAuthenticated, resetAuthentication } from "../../etc/auth"
 import { goto } from "../../etc/nav"
 
-import Fieldset from "Fieldset"
-import TextInput from "TextInput"
-import Button from "Button"
+import AuthenticationForm from "AuthenticationForm"
 
 export default class Authentication extends Component {
 
   state = {
-    checkComplete: false,
-    email: "",
-    password: ""
+    checkComplete: false
   }
 
   componentDidMount() {
@@ -28,33 +24,13 @@ export default class Authentication extends Component {
   }
 
   render() {
-
     if (!this.state.checkComplete) return <div>loading</div>
-
     return (
       <div className="Authentication">
-        <form onSubmit={this.handleSubmit}>
-          <Fieldset>
-            <TextInput name="email" value={this.state.email} onChange={this.handleEmailChange} />
-            <TextInput type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
-          </Fieldset>
-          <Button type="submit" text="Sign in" />
-        </form>
+        <figure></figure>
+        <AuthenticationForm />
       </div>
     )
-
-  }
-
-  handleEmailChange = (event) => {
-    this.setState({
-      email: event.target.value
-    })
-  }
-
-  handlePasswordChange = (event) => {
-    this.setState({
-      password: event.target.value
-    })
   }
 
   handleSubmit = (event) => {
