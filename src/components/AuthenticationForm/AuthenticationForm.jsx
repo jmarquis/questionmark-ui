@@ -33,6 +33,7 @@ export default class AuthenticationForm extends Component {
           size="large"
           text="Sign in"
         />
+        <Button text="Register" transparent />
       </Form>
     )
   }

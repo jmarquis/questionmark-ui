@@ -1,6 +1,19 @@
 .Form {
   display: flex;
   flex-flow: column nowrap;
+  width: 300px;
+
+  > .Button {
+    align-self: center;
+
+    &.large {
+      width: 100%;
+    }
+
+    & + .Button {
+      margin-top: 15px;
+    }
+  }
 
   > * + * {
     margin-top: 20px;
