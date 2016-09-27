@@ -20,6 +20,7 @@ export default class AuthenticationForm extends Component {
             name="email"
             value={this.state.email}
             onChange={this.handleEmailChange}
+            autoFocus
           />
           <TextInput
             type="password"
