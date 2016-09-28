@@ -2,29 +2,29 @@
 
 .TextInput {
   height: 60px;
-  background-color: @white;
-  border: 1px solid @panel-border;
+  background-color: @color-1;
+  border: 1px solid @color-4;
   border-radius: 5px;
   padding: 0 20px 3px;
   font-size: 20px;
-  color: @text;
+  color: @color-7;
   outline: 0;
   margin: 20px;
 
   .dark & {
-    background-color: @panel-border;
-    border-color: @border;
+    background-color: @color-4;
+    border-color: @color-5;
 
     &:focus {
-      background-color: @white;
+      background-color: @color-1;
     }
   }
 
   &::placeholder {
-    color: @label-color;
+    color: @color-6;
   }
 
   &:focus {
-    border-color: @border;
+    border-color: @color-5;
   }
 }
