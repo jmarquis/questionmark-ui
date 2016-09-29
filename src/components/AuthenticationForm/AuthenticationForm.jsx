@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 import Form from "Form"
 import Fieldset from "Fieldset"
+import Field from "Field"
 import TextInput from "TextInput"
 import Button from "Button"
 
@@ -16,18 +17,22 @@ export default class AuthenticationForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Fieldset>
-          <TextInput
-            name="email"
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-            autoFocus
-          />
-          <TextInput
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handlePasswordChange}
-          />
+          <Field label="Email Address">
+            <TextInput
+              name="email"
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+              autoFocus
+            />
+          </Field>
+          <Field label="Password">
+            <TextInput
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handlePasswordChange}
+            />
+          </Field>
         </Fieldset>
         <Button
           type="submit"

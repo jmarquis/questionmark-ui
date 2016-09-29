@@ -12,12 +12,19 @@ export default class Button extends Component {
   }
 
   render() {
-    const { text, ...otherProps } = this.props
+
+    const {
+      text,
+      size,
+      transparent,
+      ...otherProps
+    } = this.props
+
     return (
       <button
         className={classNames("Button", {
-          [this.props.size]: this.props.size,
-          transparent: this.props.transparent
+          [size]: size,
+          transparent
         })}
         type="button"
         {...otherProps}
@@ -25,6 +32,7 @@ export default class Button extends Component {
         {text}
       </button>
     )
+
   }
 
 }
