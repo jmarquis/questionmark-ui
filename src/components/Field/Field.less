@@ -1,3 +1,5 @@
+@import "../../styles/colors";
+
 .Field {
   position: relative;
 
@@ -7,6 +9,10 @@
     right: 100%;
     margin-right: 15px;
     white-space: nowrap;
+  }
+
+  &.focused > .Label {
+    color: @color-5;
   }
 
   > :not(.Label) {

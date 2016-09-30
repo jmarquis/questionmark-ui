@@ -9,9 +9,10 @@ export default class Label extends Component {
   }
 
   render() {
+    const { text, ...otherProps } = this.props
     return (
-      <label className="Label">
-        {this.props.text}
+      <label className="Label" {...otherProps}>
+        {text}
       </label>
     )
   }
