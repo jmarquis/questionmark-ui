@@ -14,11 +14,9 @@ export default class Authentication extends Component {
   }
 
   componentDidMount() {
-    resetAuthentication().then(() => {
-      isAuthenticated().then(this.handleAuthenticated).catch(() => {
-        this.setState({
-          checkComplete: true
-        })
+    isAuthenticated().then(this.handleAuthenticated).catch(() => {
+      this.setState({
+        checkComplete: true
       })
     })
   }
@@ -28,14 +26,14 @@ export default class Authentication extends Component {
     return (
       <div className="Authentication dark">
         <figure></figure>
-        <AuthenticationForm />
+        <AuthenticationForm onSubmit={this.handleSubmit} />
       </div>
     )
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = (event, state) => {
     event.preventDefault()
-    const { email, password } = this.state
+    const { email, password } = state
     authenticate({ email, password })
       .then(this.handleAuthenticated)
       .catch(this.handleAuthenticationError)

@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, PropTypes } from "react"
 
 import Form from "Form"
 import Fieldset from "Fieldset"
@@ -8,6 +8,10 @@ import Button from "Button"
 
 export default class AuthenticationForm extends Component {
 
+  static propTypes = {
+    onSubmit: PropTypes.func
+  }
+
   state = {
     email: "",
     password: ""
@@ -15,7 +19,7 @@ export default class AuthenticationForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={event => this.props.onSubmit(event, this.state)}>
         <Fieldset>
           <Field label="Email Address">
             <TextInput
