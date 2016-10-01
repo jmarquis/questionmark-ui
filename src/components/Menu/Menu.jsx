@@ -1,31 +1,18 @@
 import "./Menu.less"
 
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
 import { connect } from "react-redux"
+import { Match } from "react-router"
 
-import { fetchProjects } from "../../actions/projects"
-
-import NavLink from "NavLink"
+import ProjectList from "ProjectList"
 
 @connect(state => {
-  const { dispatch, projects, location } = state
+  const { location } = state
   return {
-    dispatch,
-    projects,
     location
   }
 })
 export default class Menu extends Component {
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    projects: PropTypes.array
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchProjects())
-  }
 
   render() {
     return (
@@ -35,17 +22,7 @@ export default class Menu extends Component {
           My Junk
         </header>
 
-        <ul>
-          {
-            this.props.projects.map(project => {
-              return (
-                <li key={project.id}>
-                  <NavLink to={`/projects/${project.id}`}>{project.name}</NavLink>
-                </li>
-              )
-            })
-          }
-        </ul>
+        <Match pattern="/projects" component={ProjectList} />
 
         <footer>
           <figure></figure>
