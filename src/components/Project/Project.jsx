@@ -24,10 +24,15 @@ export default class Project extends Component {
     projectId: PropTypes.string
   }
 
+  componentDidMount() {
+    console.log("mount", this.props.projectId)
+    this.loadProject(this.props.projectId)
+  }
+
   componentWillUpdate(nextProps) {
+    console.log("update", nextProps.projectId)
     if (this.props.projectId !== nextProps.projectId) {
-      const { dispatch, projectId } = nextProps
-      dispatch(fetchLists(projectId))
+      this.loadProject(nextProps.projectId)
     }
   }
 
@@ -43,6 +48,11 @@ export default class Project extends Component {
         }
       </div>
     )
+  }
+
+  loadProject = projectId => {
+    const { dispatch } = this.props
+    dispatch(fetchLists(projectId))
   }
 
 }

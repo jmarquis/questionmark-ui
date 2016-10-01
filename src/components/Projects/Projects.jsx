@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
 import { Match } from "react-router"
 
-import Menu from "Menu"
 import Project from "Project"
 
 export default class Projects extends Component {
@@ -9,7 +8,7 @@ export default class Projects extends Component {
   render() {
     return (
       <div className="Projects">
-        <Match pattern="/:projectId" component={Project} />
+        <Match pattern="/projects/:projectId" component={Project} />
       </div>
     )
   }

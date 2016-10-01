@@ -9,5 +9,5 @@ export function goto(path) {
       search: "",
       hash: ""
     }
-})
+  })
 }
