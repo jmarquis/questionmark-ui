@@ -1,4 +1,4 @@
-import request from "../etc/api"
+import request from "../etc/request"
 
 function updateLists({ lists, projectId }) {
   return {

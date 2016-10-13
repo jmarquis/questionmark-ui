@@ -1,7 +1,7 @@
-import request from "../etc/api"
+import request from "../etc/request"
 
 function updateProjects(projects) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({
       type: "UPDATE_PROJECTS",
       projects

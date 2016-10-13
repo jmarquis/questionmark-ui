@@ -4,7 +4,7 @@ import React, { Component, PropTypes, Children } from "react"
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 import { connect } from "react-redux"
 
-import { fetchCurrentUser } from "../../actions/user"
+import { fetchCurrentUser, authenticate } from "../../actions/user"
 import { goto } from "../../etc/nav"
 
 import AuthenticationForm from "AuthenticationForm"
@@ -57,10 +57,9 @@ export default class Authentication extends Component {
 
   handleSubmit = (event, state) => {
     event.preventDefault()
+    const { dispatch } = this.props
     const { email, password } = state
-    authenticate({ email, password })
-      .then(this.handleAuthenticated)
-      .catch(this.handleAuthenticationError)
+    dispatch(authenticate({ email, password }))
   }
 
   handleAuthenticated = () => {
