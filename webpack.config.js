@@ -58,8 +58,23 @@ module.exports = {
         include: src,
         use: [
           "style",
-          "css",
-          "postcss",
+          {
+            loader: "css",
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: "postcss",
+            options: {
+              plugins: () => {
+                return [
+                  require("postcss-import"),
+                  require("autoprefixer")
+                ]
+              }
+            }
+          },
           "less"
         ]
       }
