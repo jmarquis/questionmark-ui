@@ -1,4 +1,4 @@
-import "base"
+import "base.less"
 
 import { AppContainer } from "react-hot-loader"
 import React from "react"
