@@ -1,6 +1,7 @@
 import "./Authentication.less"
 
-import React, { Component } from "react"
+import React, { Component, Children } from "react"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 
 import { authenticate, isAuthenticated, resetAuthentication } from "../../etc/auth"
 import { goto } from "../../etc/nav"
@@ -22,12 +23,21 @@ export default class Authentication extends Component {
   }
 
   render() {
-    if (!this.state.checkComplete) return <div>loading</div>
+    if (!this.state.checkComplete) return null
     return (
-      <div className="Authentication dark">
-        <figure></figure>
-        <AuthenticationForm onSubmit={this.handleSubmit} />
-      </div>
+      <ReactCSSTransitionGroup
+        transitionName="auth"
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
+        component={props => Children.toArray(props.children)[0] || null}
+      >
+        <div key="Authentication" className="Authentication dark">
+          <figure></figure>
+          <AuthenticationForm onSubmit={this.handleSubmit} />
+        </div>
+      </ReactCSSTransitionGroup>
     )
   }
 

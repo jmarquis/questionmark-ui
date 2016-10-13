@@ -6,13 +6,38 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: @color-7;
   z-index: 100;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
   padding-bottom: 10vh;
+
+  &.auth-appear {
+    transform: scale(.95);
+    opacity: 0;
+  }
+
+  &.auth-appear-active {
+    transition:
+      transform .5s ease-in-out,
+      opacity .5s ease-in-out;
+    transform: none;
+    opacity: 1;
+  }
+
+  &.auth-leave {
+    transform: none;
+    opacity: 1;
+  }
+
+  &.auth-leave-active {
+    transition:
+      transform .5s ease-in-out,
+      opacity .5s ease-in-out;
+    transform: scale(.95);
+    opacity: 0;
+  }
 
   > figure {
     margin: 0 0 50px;
