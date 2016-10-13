@@ -1,6 +1,7 @@
 import "./Form.less"
 
 import React, { Component, PropTypes } from "react"
+import classNames from "classnames"
 
 export default class Form extends Component {
 
@@ -15,7 +16,7 @@ export default class Form extends Component {
     return (
       <form
         {...otherProps}
-        className={`Form ${className}`}
+        className={classNames("Form", { [className]: className })}
         onSubmit={event => this.handleSubmit(event, onSubmit)}
       >
         {this.props.children}

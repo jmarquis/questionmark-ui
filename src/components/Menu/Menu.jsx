@@ -17,7 +17,7 @@ export default class Menu extends Component {
 
   static propTypes = {
     location: PropTypes.object,
-    user: PropTypes.object
+    user: PropTypes.any
   }
 
   render() {

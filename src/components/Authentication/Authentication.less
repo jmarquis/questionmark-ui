@@ -13,12 +13,14 @@
   justify-content: center;
   padding-bottom: 10vh;
 
-  &.auth-appear {
+  &.auth-appear,
+  &.auth-enter {
     transform: scale(.95);
     opacity: 0;
   }
 
-  &.auth-appear-active {
+  &.auth-appear-active,
+  &.auth-enter-active {
     transition:
       transform .5s ease-in-out,
       opacity .5s ease-in-out;
