@@ -7,10 +7,9 @@ import { Match } from "react-router"
 import ProjectList from "ProjectList"
 
 @connect(state => {
-  const { location, user } = state
+  const { location } = state
   return {
-    location,
-    user
+    location
   }
 })
 export default class Menu extends Component {
@@ -21,7 +20,6 @@ export default class Menu extends Component {
   }
 
   render() {
-    if (!this.props.user) return null
     return (
       <div className="Menu">
 

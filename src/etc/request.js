@@ -20,7 +20,13 @@ export default function request(path, options) {
         throw new Error(response.status)
       }
     }).then(response => {
-      return response.json()
+      return new Promise(resolve => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(() => {
+          resolve(response)
+        })
+      })
     }).then(response => {
       resolve(response)
     }).catch(error => {

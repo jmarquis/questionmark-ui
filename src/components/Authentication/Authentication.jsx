@@ -1,57 +1,31 @@
 import "./Authentication.less"
 
-import React, { Component, PropTypes, Children } from "react"
-import ReactCSSTransitionGroup from "react-addons-css-transition-group"
+import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 
-import { fetchCurrentUser, authenticate } from "../../actions/user"
+import { authenticate } from "../../actions/session"
 import { goto } from "../../etc/nav"
 
 import AuthenticationForm from "AuthenticationForm"
 
 @connect(state => {
-  const { dispatch, user } = state
+  const { dispatch } = state
   return {
-    dispatch,
-    user
+    dispatch
   }
 })
 export default class Authentication extends Component {
 
   static propTypes = {
-    dispatch: PropTypes.func,
-    user: PropTypes.any
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props
-    setTimeout(() => {
-      dispatch(fetchCurrentUser())
-    }, 500)
+    dispatch: PropTypes.func
   }
 
   render() {
-    const { user } = this.props
     return (
-      <ReactCSSTransitionGroup
-        transitionName="auth"
-        transitionAppear={true}
-        transitionAppearTimeout={500}
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-        component={props => Children.toArray(props.children)[0] || null}
-      >
-        {(() => {
-          if (user === false) {
-            return (
-              <div key="Authentication" className="Authentication dark">
-                <figure></figure>
-                <AuthenticationForm onSubmit={this.handleSubmit} />
-              </div>
-            )
-          }
-        })()}
-      </ReactCSSTransitionGroup>
+      <div key="Authentication" className="Authentication dark">
+        <figure></figure>
+        <AuthenticationForm onSubmit={this.handleSubmit} />
+      </div>
     )
   }
 
