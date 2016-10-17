@@ -12,7 +12,6 @@ export function fetchSession() {
     get("sessions").then(user => {
       dispatch(updateSession(user))
     }).catch(error => {
-      console.error("boom", error)
       dispatch(updateSession(false))
     })
   }
@@ -30,7 +29,7 @@ export function authenticate({ email, password }) {
       // TODO: dispatch location update
     }).catch(error => {
       dispatch(updateSession(false))
-      console.log(error)
+      console.error(error)
     })
   }
 }
@@ -40,7 +39,7 @@ export function deauthenticate() {
     destroy("sessions").then(() => {
       dispatch(updateSession(false))
     }).catch(error => {
-      console.log(error)
+      console.error(error)
     })
   }
 }

@@ -33,38 +33,38 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <main id="App">
-        {(() => {
-          if (this.props.session === false) {
-            return (
-              <ReactCSSTransitionGroup
-                transitionName="auth"
-                transitionAppear={true}
-                transitionAppearTimeout={500}
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-              >
-                <Authentication key="Authentication" />
-              </ReactCSSTransitionGroup>
-            )
-          } else if (this.props.session) {
-            return (
-              <ReactCSSTransitionGroup
-                transitionName="auth"
-                transitionAppear={true}
-                transitionAppearTimeout={500}
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-              >
-                <Menu key="Menu" />
-                <Match pattern="/projects" component={Projects} key="Projects" />
-              </ReactCSSTransitionGroup>
-            )
-          }
-        })()}
-      </main>
-    )
+    if (this.props.session === false) {
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="auth"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+          component="main"
+          id="App"
+        >
+          <Authentication key="Authentication" />
+        </ReactCSSTransitionGroup>
+      )
+    } else if (this.props.session) {
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="auth"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+          component="main"
+          id="App"
+        >
+          <Menu key="Menu" />
+          <Match pattern="/projects" component={Projects} key="Projects" />
+        </ReactCSSTransitionGroup>
+      )
+    } else {
+      return <main id="App" />
+    }
   }
 
 }

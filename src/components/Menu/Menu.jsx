@@ -24,7 +24,7 @@ export default class Menu extends Component {
       <div className="Menu">
 
         <header>
-          My Junk
+          Personal
         </header>
 
         <Match pattern="/projects" component={ProjectList} />

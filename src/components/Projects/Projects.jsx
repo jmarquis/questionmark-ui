@@ -1,3 +1,5 @@
+import "./Projects.less"
+
 import React, { Component, PropTypes } from "react"
 import { Match } from "react-router"
 import { connect } from "react-redux"
@@ -16,13 +18,6 @@ export default class Projects extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props
-    setTimeout(() => {
-      dispatch(deauthenticate())
-    }, 3000)
   }
 
   render() {
