@@ -27,7 +27,7 @@ export default class Menu extends Component {
           Personal
         </header>
 
-        <Match pattern="/projects" component={ProjectList} />
+        <Match pattern="/:workspaceId" component={ProjectList} />
 
         <footer>
           <figure></figure>

@@ -3,56 +3,62 @@ import "./Project.less"
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 
-import { fetchLists } from "actions/lists"
+import { fetchProject } from "actions/projects"
 
 import List from "List"
 
 @connect((state, ownProps) => {
-  const { dispatch, lists } = state
+
   const { projectId } = ownProps.params
-  return {
+
+  const {
     dispatch,
     lists,
-    projectId
+    projects: { [projectId]: project }
+  } = state
+
+  return {
+    dispatch,
+    projectId,
+    project,
+    lists: project ? project.list_ids.map(listId => lists[listId]) : []
   }
+
 })
 export default class Project extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    lists: PropTypes.object,
-    projectId: PropTypes.string
+    projectId: PropTypes.string,
+    project: PropTypes.object,
+    lists: PropTypes.array
   }
 
   componentDidMount() {
-    console.log("mount", this.props.projectId)
-    this.loadProject(this.props.projectId)
-  }
-
-  componentWillUpdate(nextProps) {
-    console.log("update", nextProps.projectId)
-    if (this.props.projectId !== nextProps.projectId) {
-      this.loadProject(nextProps.projectId)
-    }
+    const { dispatch, projectId } = this.props
+    dispatch(fetchProject(projectId))
   }
 
   render() {
-    const { projectId } = this.props
-    if (!this.props.lists[projectId]) return null
+    const { project, lists } = this.props
+    if (!project) return null
     return (
       <div className="Project">
         {
-          this.props.lists[projectId].map(list => {
-            return <List key={list.id} title={list.title} cards={list.cards} />
+          lists.map(list => {
+            if (!list) return null
+            return (
+              <List
+                key={list.id}
+                id={list.id}
+                title={list.title}
+                cards={list.cards}
+              />
+            )
           })
         }
       </div>
     )
-  }
-
-  loadProject = projectId => {
-    const { dispatch } = this.props
-    dispatch(fetchLists(projectId))
   }
 
 }

@@ -9,10 +9,21 @@ function updateProjects(projects) {
   }
 }
 
-export function fetchProjects() {
+export function fetchProjects(workspaceId) {
   return dispatch => {
-    request("projects").then(projects => {
+    request(`workspaces/${workspaceId}`).then(projects => {
       dispatch(updateProjects(projects))
+    })
+  }
+}
+
+export function fetchProject(projectId) {
+  return dispatch => {
+    request(`projects/${projectId}/lists`).then(lists => {
+      dispatch({
+        type: "UPDATE_LISTS",
+        lists
+      })
     })
   }
 }

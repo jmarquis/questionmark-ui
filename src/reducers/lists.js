@@ -5,7 +5,12 @@ export function lists(state = {}, action) {
     case "UPDATE_LISTS":
       return {
         ...state,
-        [action.projectId]: action.lists
+        ...action.lists
+      }
+
+    case "CREATE_CARD":
+      return {
+        ...state
       }
 
     default:

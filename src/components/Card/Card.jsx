@@ -10,9 +10,9 @@ export default class Card extends Component {
 
   render() {
     return (
-      <div className="Card">
+      <li className="Card">
         {this.props.title}
-      </div>
+      </li>
     )
   }
 

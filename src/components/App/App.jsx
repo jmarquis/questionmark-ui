@@ -9,7 +9,7 @@ import { fetchSession } from "../../actions/session"
 
 import Menu from "Menu"
 import Authentication from "Authentication"
-import Projects from "Projects"
+import Workspace from "Workspace"
 
 @connect(state => {
   const { dispatch, session } = state
@@ -43,6 +43,7 @@ export default class App extends Component {
           transitionLeaveTimeout={500}
           component="main"
           id="App"
+          className="signed-out"
         >
           <Authentication key="Authentication" />
         </ReactCSSTransitionGroup>
@@ -59,11 +60,11 @@ export default class App extends Component {
           id="App"
         >
           <Menu key="Menu" />
-          <Match pattern="/projects" component={Projects} key="Projects" />
+          <Match pattern="/:workspaceId" component={Workspace} key="Workspace" />
         </ReactCSSTransitionGroup>
       )
     } else {
-      return <main id="App" />
+      return <main id="App" className="signed-out" />
     }
   }
 
