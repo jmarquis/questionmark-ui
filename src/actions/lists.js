@@ -1,4 +1,4 @@
-import request from "../etc/request"
+import { get, post } from "../etc/request"
 
 function updateLists(lists) {
   return {
@@ -9,25 +9,35 @@ function updateLists(lists) {
 
 export function fetchLists(projectId) {
   return dispatch => {
-    request(`projects/${projectId}/lists`).then(lists => {
+    get(`projects/${projectId}/lists`).then(lists => {
       dispatch(updateLists(lists))
     })
   }
 }
 
-export function createCard(listId) {
-  return {
-    type: "CREATE_CARD",
-    listId
-  }
-}
-
 export function fetchList(listId) {
   return dispatch => {
-    request(`lists/${listId}/cards`).then(cards => {
+    get(`lists/${listId}/cards`).then(cards => {
       dispatch({
         type: "UPDATE_CARDS",
         cards
+      })
+    })
+  }
+}
+
+export function createCard(listId, title) {
+  return dispatch => {
+    post(`lists/${listId}/cards`, {
+      body: JSON.stringify({
+        list_id: listId,
+        title
+      })
+    }).then(card => {
+      dispatch({
+        type: "CREATE_CARD",
+        listId,
+        card
       })
     })
   }

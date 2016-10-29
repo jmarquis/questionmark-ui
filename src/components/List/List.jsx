@@ -4,15 +4,18 @@ import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import classNames from "classnames"
 
-import { fetchList } from "../../actions/lists"
+import { fetchList, createCard } from "../../actions/lists"
 
 import Card from "Card"
+import TextInput from "TextInput"
 
 @connect((state, ownProps) => {
   const { id } = ownProps
   const { cards, lists: { [id]: list } } = state
   return {
-    cards: list ? list.card_ids.map(cardId => cards[cardId]) : []
+    cards: list ? list.card_ids.map(cardId => {
+      return typeof cardId === "number" ? cards[cardId] : cardId
+    }) : []
   }
 })
 export default class List extends Component {
@@ -22,6 +25,10 @@ export default class List extends Component {
     id: PropTypes.number.isRequired,
     title: PropTypes.string,
     cards: PropTypes.array,
+  }
+
+  state = {
+    newCard: false
   }
 
   componentDidMount() {
@@ -39,19 +46,37 @@ export default class List extends Component {
         <ul>
           {
             cards.map(card => {
-              if (!card) return null;
+              if (!card) return null
               return <Card key={card.id} title={card.title} />
             })
           }
+          {(() => {
+            if (this.state.newCard) {
+              return <Card editing={true} onBlur={this.handleNewCardBlur} />
+            }
+          })()}
         </ul>
-        <button type="button" onClick={this.handleAddClick} />
+        {(() => {
+          if (!this.state.newCard) {
+            return <button type="button" onClick={this.handleAddClick} />
+          }
+        })()}
       </div>
     )
   }
 
   handleAddClick = () => {
+    this.setState({
+      newCard: true
+    })
+  }
+
+  handleNewCardBlur = title => {
     const { dispatch, id } = this.props
-    dispatch(createCard(id))
+    this.setState({
+      newCard: false
+    })
+    dispatch(createCard(id, title))
   }
 
 }
