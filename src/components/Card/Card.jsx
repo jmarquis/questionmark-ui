@@ -33,6 +33,7 @@ export default class Card extends Component {
           rows={1}
           readOnly={!editing}
           value={this.state.title}
+          onKeyDown={this.handleKeyDown}
           onChange={this.handleTitleChange}
           autoFocus={this.props.editing}
           onBlur={this.handleBlur}
@@ -41,9 +42,16 @@ export default class Card extends Component {
     )
   }
 
+  handleKeyDown = event => {
+    if (this.props.editing && event.keyCode === 13) {
+      event.preventDefault()
+      this.refs.textarea.blur()
+    }
+  }
+
   handleTitleChange = event => {
     this.setState({
-      title: event.target.value
+      title: event.target.value.replace(/\n/g, "")
     })
   }
 

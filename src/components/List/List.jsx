@@ -76,7 +76,9 @@ export default class List extends Component {
     this.setState({
       newCard: false
     })
-    dispatch(createCard(id, title))
+    if (title) {
+      dispatch(createCard(id, title))
+    }
   }
 
 }
