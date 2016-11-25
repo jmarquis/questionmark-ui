@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 
 import { fetchSession } from "../../actions/session"
 
+import MenuLayout from "MenuLayout"
 import Menu from "Menu"
 import Authentication from "Authentication"
 import Workspace from "Workspace"
@@ -33,6 +34,27 @@ export default class App extends Component {
   }
 
   render() {
+    const { session } = this.props
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="layout"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
+        component="main"
+        id="App"
+      >
+        {(() => {
+          if (session === false) {
+            return <Authentication key="Authentication" />
+          } else if (session) {
+            return <MenuLayout key="MenuLayout" />
+          } else {
+            return null
+          }
+        })()}
+      </ReactCSSTransitionGroup>
+    )
+
     if (this.props.session === false) {
       return (
         <ReactCSSTransitionGroup
@@ -64,7 +86,18 @@ export default class App extends Component {
         </ReactCSSTransitionGroup>
       )
     } else {
-      return <main id="App" className="signed-out" />
+      return (
+        <ReactCSSTransitionGroup
+          transitionName="auth"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+          component="main"
+          id="App"
+          className="signed-out"
+        />
+      )
     }
   }
 

@@ -1,20 +1,22 @@
 @import "../../styles/colors";
 
 #App {
-  display: flex;
   width: 100vw;
   height: 100vh;
+  background-color: @color-7;
+  position: relative;
 
-  &.signed-out {
-    background-color: @color-7;
+  > * {
+    z-index: 1;
   }
 
-  > .Menu {
-    flex: none;
-    width: 250px;
+  > .layout-enter {
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .5s ease-out;
   }
 
-  > :last-child {
-    flex: auto;
+  > .layout-enter-active {
+    opacity: 1;
   }
 }
