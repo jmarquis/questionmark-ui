@@ -41,7 +41,7 @@ module.exports = {
       {
         test: /\.html?$/,
         include: src,
-        use: "file",
+        use: "file-loader",
         options: {
           name: "index.html"
         }
@@ -50,22 +50,22 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: src,
-        use: "babel"
+        use: "babel-loader"
       },
 
       {
         test: /\.less$/,
         include: src,
         use: [
-          "style",
+          "style-loader",
           {
-            loader: "css",
+            loader: "css-loader",
             options: {
               importLoaders: 1
             }
           },
           {
-            loader: "postcss",
+            loader: "postcss-loader",
             options: {
               plugins: () => {
                 return [
@@ -75,7 +75,7 @@ module.exports = {
               }
             }
           },
-          "less"
+          "less-loader"
         ]
       }
 
