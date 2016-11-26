@@ -3,21 +3,30 @@ import "./Authentication.less"
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 
-import { authenticate } from "../../actions/session"
-import { goto } from "../../etc/nav"
+import { authenticate } from "../../actions/user"
 
 import AuthenticationForm from "AuthenticationForm"
 
 @connect(state => {
-  const { dispatch } = state
+  const { dispatch, location } = state
   return {
-    dispatch
+    dispatch,
+    location
   }
 })
 export default class Authentication extends Component {
 
   static propTypes = {
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    location: PropTypes.object
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  componentDidMount() {
+    this.context.router.replaceWith("/")
   }
 
   render() {
@@ -34,14 +43,6 @@ export default class Authentication extends Component {
     const { dispatch } = this.props
     const { email, password } = state
     dispatch(authenticate({ email, password }))
-  }
-
-  handleAuthenticated = () => {
-    goto("/projects/1")
-  }
-
-  handleAuthenticationError = error => {
-    alert(error)
   }
 
 }

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 
-import { destroySession } from "actions/session"
+import { endSession } from "actions/user"
 
 @connect()
 export default class SignOut extends Component {
@@ -12,11 +12,11 @@ export default class SignOut extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(destroySession())
+    dispatch(endSession())
   }
 
   render() {
-    return <div>hey</div>
+    return null
   }
 
 }

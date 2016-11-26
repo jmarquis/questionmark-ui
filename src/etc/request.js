@@ -1,7 +1,6 @@
 import "whatwg-fetch"
 
 import server from "../config/server"
-import { goto } from "../etc/nav"
 
 export default function request(path, options) {
   return new Promise((resolve, reject) => {
@@ -31,7 +30,6 @@ export default function request(path, options) {
       resolve(response)
     }).catch(error => {
       if (error.message === "403") {
-        goto("/")
       }
       reject(error.message)
     })

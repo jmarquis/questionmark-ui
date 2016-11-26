@@ -1,25 +1,25 @@
 import { get, post, destroy } from "../etc/request"
 
-function updateSession(user) {
+function updateUser(user) {
   return {
-    type: "UPDATE_SESSION",
+    type: "UPDATE_USER",
     user
   }
 }
 
-export function fetchSession() {
+export function fetchUser() {
   return dispatch => {
     get("sessions").then(user => {
-      dispatch(updateSession(user))
+      dispatch(updateUser(user))
     }).catch(error => {
-      dispatch(updateSession(false))
+      dispatch(updateUser(false))
     })
   }
 }
 
 export function authenticate({ email, password }) {
   return dispatch => {
-    dispatch(updateSession(null))
+    dispatch(updateUser(null))
     setTimeout(() => {
       post("sessions", {
         body: JSON.stringify({
@@ -27,22 +27,21 @@ export function authenticate({ email, password }) {
           password
         })
       }).then(user => {
-        dispatch(updateSession(user))
-        // TODO: dispatch location update
+        dispatch(updateUser(user))
       }).catch(error => {
-        dispatch(updateSession(false))
+        dispatch(updateUser(false))
         console.error(error)
       })
-    }, 500)
+    }, 1000)
   }
 }
 
-export function destroySession() {
+export function endSession() {
   return dispatch => {
-    dispatch(updateSession(null))
+    dispatch(updateUser(null))
     setTimeout(() => {
       destroy("sessions").then(() => {
-        dispatch(updateSession(false))
+        dispatch(updateUser(false))
       }).catch(error => {
         console.error(error)
       })

@@ -10,7 +10,7 @@ import { fetchWorkspace } from "../../actions/workspaces"
 
 @connect((state, ownProps) => {
   const { dispatch } = state
-  const { params: { workspaceId } } = ownProps
+  const { params: { workspaceId, projectId } } = ownProps
   return {
     dispatch,
     workspaceId
@@ -20,12 +20,22 @@ export default class Workspace extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    workspaceId: PropTypes.string
+    workspaceId: PropTypes.string,
+    projectId: PropTypes.string
+  }
+
+  static contextTypes = {
+    router: PropTypes.object
   }
 
   componentDidMount() {
-    const { dispatch, workspaceId } = this.props
+    const { dispatch, workspaceId, projectId } = this.props
     dispatch(fetchWorkspace(workspaceId))
+
+    const { router: { transitionTo } } = this.context
+    if (!projectId) {
+      transitionTo(`/${workspaceId}/1`)
+    }
   }
 
   render() {

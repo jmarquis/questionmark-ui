@@ -1,8 +1,8 @@
-export function session(state = null, action) {
+export function user(state = null, action) {
 
   switch (action.type) {
 
-    case "UPDATE_SESSION":
+    case "UPDATE_USER":
       return action.user
 
     default:

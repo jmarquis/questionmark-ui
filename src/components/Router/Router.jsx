@@ -1,36 +1,18 @@
 import React, { Component, PropTypes } from "react"
 import { BrowserRouter } from "react-router"
-import { connect } from "react-redux"
 
-@connect(state => {
-  const { location, dispatch } = state
-  return {
-    location,
-    dispatch
-  }
-})
 export default class Router extends Component {
 
   static propTypes = {
-    children: PropTypes.node,
-    dispatch: PropTypes.func
+    children: PropTypes.node
   }
 
   render() {
     return (
-      <BrowserRouter location={location} onChange={this.handleLocationChange}>
+      <BrowserRouter onChange={a => console.log(a)}>
         {this.props.children}
       </BrowserRouter>
     )
-  }
-
-  handleLocationChange = location => {
-    const { dispatch } = this.props
-    console.log("event")
-    dispatch({
-      type: "LOCATION_CHANGE",
-      location
-    })
   }
 
 }

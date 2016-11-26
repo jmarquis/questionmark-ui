@@ -4,42 +4,42 @@ import React, { Component, PropTypes } from "react"
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 import { connect } from "react-redux"
 
-import { fetchSession } from "../../actions/session"
+import { fetchUser } from "../../actions/user"
 
 import MenuLayout from "MenuLayout"
 import Authentication from "Authentication"
 
 @connect(state => {
-  const { dispatch, session } = state
+  const { dispatch, user } = state
   return {
     dispatch,
-    session
+    user
   }
 })
 export default class App extends Component {
 
   static propTypes = {
     dispatch: PropTypes.func,
-    session: PropTypes.any
+    user: PropTypes.any
   }
 
   componentDidMount() {
     const { dispatch } = this.props
     if (document.readyState === "complete") {
       setTimeout(() => {
-        dispatch(fetchSession())
+        dispatch(fetchUser())
       }, 500)
     } else {
       document.addEventListener("readystatechange", () => {
         if (document.readyState === "complete") {
-          dispatch(fetchSession())
+          dispatch(fetchUser())
         }
       })
     }
   }
 
   render() {
-    const { session } = this.props
+    const { user } = this.props
     return (
       <ReactCSSTransitionGroup
         transitionName="layout"
@@ -49,9 +49,9 @@ export default class App extends Component {
         id="App"
       >
         {(() => {
-          if (session === false) {
+          if (user === false) {
             return <Authentication key="Authentication" />
-          } else if (session) {
+          } else if (user) {
             return <MenuLayout key="MenuLayout" />
           } else {
             return null
