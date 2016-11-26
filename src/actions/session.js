@@ -34,7 +34,7 @@ export function authenticate({ email, password }) {
   }
 }
 
-export function deauthenticate() {
+export function destroySession() {
   return dispatch => {
     destroy("sessions").then(() => {
       dispatch(updateSession(false))

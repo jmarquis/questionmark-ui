@@ -14,14 +14,12 @@
   padding-bottom: 10vh;
   background-color: @color-7;
 
-  &.auth-appear,
-  &.auth-enter {
+  &.layout-enter {
     transform: scale(.95);
     opacity: 0;
   }
 
-  &.auth-appear-active,
-  &.auth-enter-active {
+  &.layout-enter-active {
     transition:
       transform .5s ease-in-out,
       opacity .5s ease-in-out;
@@ -29,12 +27,12 @@
     opacity: 1;
   }
 
-  &.auth-leave {
+  &.layout-leave {
     transform: none;
     opacity: 1;
   }
 
-  &.auth-leave-active {
+  &.layout-leave-active {
     transition:
       transform .5s ease-in-out,
       opacity .5s ease-in-out;

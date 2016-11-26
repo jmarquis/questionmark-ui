@@ -1,16 +1,13 @@
 import "./App.less"
 
 import React, { Component, PropTypes } from "react"
-import { Match } from "react-router"
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 import { connect } from "react-redux"
 
 import { fetchSession } from "../../actions/session"
 
 import MenuLayout from "MenuLayout"
-import Menu from "Menu"
 import Authentication from "Authentication"
-import Workspace from "Workspace"
 
 @connect(state => {
   const { dispatch, session } = state
@@ -28,9 +25,17 @@ export default class App extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    setTimeout(() => {
-      dispatch(fetchSession())
-    }, 500)
+    if (document.readyState === "complete") {
+      setTimeout(() => {
+        dispatch(fetchSession())
+      }, 500)
+    } else {
+      document.addEventListener("readystatechange", () => {
+        if (document.readyState === "complete") {
+          dispatch(fetchSession())
+        }
+      })
+    }
   }
 
   render() {
@@ -54,51 +59,6 @@ export default class App extends Component {
         })()}
       </ReactCSSTransitionGroup>
     )
-
-    if (this.props.session === false) {
-      return (
-        <ReactCSSTransitionGroup
-          transitionName="auth"
-          transitionAppear={true}
-          transitionAppearTimeout={500}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-          component="main"
-          id="App"
-          className="signed-out"
-        >
-          <Authentication key="Authentication" />
-        </ReactCSSTransitionGroup>
-      )
-    } else if (this.props.session) {
-      return (
-        <ReactCSSTransitionGroup
-          transitionName="auth"
-          transitionAppear={true}
-          transitionAppearTimeout={500}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-          component="main"
-          id="App"
-        >
-          <Menu key="Menu" />
-          <Match pattern="/:workspaceId" component={Workspace} key="Workspace" />
-        </ReactCSSTransitionGroup>
-      )
-    } else {
-      return (
-        <ReactCSSTransitionGroup
-          transitionName="auth"
-          transitionAppear={true}
-          transitionAppearTimeout={500}
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-          component="main"
-          id="App"
-          className="signed-out"
-        />
-      )
-    }
   }
 
 }
