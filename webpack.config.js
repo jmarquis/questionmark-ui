@@ -21,6 +21,7 @@ module.exports = {
     modules: [
       path.resolve("./src/components"),
       path.resolve("./src/styles"),
+      path.resolve("./src/icons"),
       path.resolve("./src"),
       "node_modules"
     ]
@@ -43,7 +44,7 @@ module.exports = {
         include: src,
         use: "file-loader",
         options: {
-          name: "index.html"
+          name: "index.html" // ugh
         }
       },
 
@@ -76,6 +77,20 @@ module.exports = {
             }
           },
           "less-loader"
+        ]
+      },
+
+      {
+        test: /\.svg$/,
+        include: src,
+        use: [
+          "babel-loader",
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true
+            }
+          }
         ]
       }
 

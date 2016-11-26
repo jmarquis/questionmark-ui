@@ -7,7 +7,8 @@ import classNames from "classnames"
 import { fetchList, createCard } from "../../actions/lists"
 
 import Card from "Card"
-import TextInput from "TextInput"
+
+import PlusIcon from "plus"
 
 @connect((state, ownProps) => {
   const { id } = ownProps
@@ -71,7 +72,9 @@ export default class List extends Component {
           if (!this.state.newCard) {
             return (
               <footer>
-                <button type="button" onClick={this.handleAddClick} />
+                <button type="button" onClick={this.handleAddClick}>
+                  <PlusIcon />
+                </button>
               </footer>
             )
           }
