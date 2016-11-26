@@ -6,7 +6,6 @@ import { Match } from "react-router"
 
 import Menu from "Menu"
 import Workspace from "Workspace"
-import SignOut from "SignOut"
 
 export default class MenuLayout extends Component {
 

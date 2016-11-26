@@ -30,12 +30,15 @@ export default class Workspace extends Component {
 
   componentDidMount() {
     const { dispatch, workspaceId, projectId } = this.props
-    dispatch(fetchWorkspace(workspaceId))
 
-    const { router: { transitionTo } } = this.context
-    if (!projectId) {
-      transitionTo(`/${workspaceId}/1`)
-    }
+    setTimeout(() => {
+      dispatch(fetchWorkspace(workspaceId))
+
+      const { router: { transitionTo } } = this.context
+      if (!projectId) {
+        transitionTo(`/${workspaceId}/1`)
+      }
+    }, 300);
   }
 
   render() {

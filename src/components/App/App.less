@@ -1,5 +1,7 @@
 @import "../../styles/colors";
 
+@layout-transition-time: .3s;
+
 #App {
   width: 100vw;
   height: 100vh;
@@ -8,7 +10,7 @@
 
   > .layout-leave {
     opacity: 1;
-    transition: opacity .5s ease-out;
+    transition: opacity @layout-transition-time ease-out;
   }
 
   > .layout-leave-active {
@@ -20,7 +22,7 @@
 
     &.layout-enter {
       opacity: 0;
-      transition: opacity .5s ease-out;
+      transition: opacity @layout-transition-time ease-out;
     }
 
     &.layout-enter-active {
@@ -29,7 +31,7 @@
 
     &.layout-leave {
       opacity: 1;
-      transition: opacity .5s ease-out;
+      transition: opacity @layout-transition-time ease-out;
     }
 
     &.layout-leave-active {
@@ -44,8 +46,8 @@
       transform: scale(.95);
       opacity: 0;
       transition:
-        transform .5s ease-in-out,
-        opacity .5s ease-in-out;
+        transform @layout-transition-time ease-in-out,
+        opacity @layout-transition-time ease-in-out;
     }
 
     &.layout-enter-active {
@@ -57,8 +59,8 @@
       transform: none;
       opacity: 1;
       transition:
-        transform .5s ease-in-out,
-        opacity .5s ease-in-out;
+        transform @layout-transition-time ease-in-out,
+        opacity @layout-transition-time ease-in-out;
     }
 
     &.layout-leave-active {

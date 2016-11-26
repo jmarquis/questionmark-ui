@@ -25,17 +25,17 @@ export default class App extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    if (document.readyState === "complete") {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (document.readyState === "complete") {
         dispatch(fetchUser())
-      }, 500)
-    } else {
-      document.addEventListener("readystatechange", () => {
-        if (document.readyState === "complete") {
-          dispatch(fetchUser())
-        }
-      })
-    }
+      } else {
+        document.addEventListener("readystatechange", () => {
+          if (document.readyState === "complete") {
+            dispatch(fetchUser())
+          }
+        })
+      }
+    }, 500)
   }
 
   render() {
@@ -43,8 +43,8 @@ export default class App extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName="layout"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
         component="main"
         id="App"
       >
