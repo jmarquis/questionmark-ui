@@ -19,27 +19,33 @@ export function fetchSession() {
 
 export function authenticate({ email, password }) {
   return dispatch => {
-    post("sessions", {
-      body: JSON.stringify({
-        email,
-        password
+    dispatch(updateSession(null))
+    setTimeout(() => {
+      post("sessions", {
+        body: JSON.stringify({
+          email,
+          password
+        })
+      }).then(user => {
+        dispatch(updateSession(user))
+        // TODO: dispatch location update
+      }).catch(error => {
+        dispatch(updateSession(false))
+        console.error(error)
       })
-    }).then(user => {
-      dispatch(updateSession(user))
-      // TODO: dispatch location update
-    }).catch(error => {
-      dispatch(updateSession(false))
-      console.error(error)
-    })
+    }, 500)
   }
 }
 
 export function destroySession() {
   return dispatch => {
-    destroy("sessions").then(() => {
-      dispatch(updateSession(false))
-    }).catch(error => {
-      console.error(error)
-    })
+    dispatch(updateSession(null))
+    setTimeout(() => {
+      destroy("sessions").then(() => {
+        dispatch(updateSession(false))
+      }).catch(error => {
+        console.error(error)
+      })
+    }, 500)
   }
 }
