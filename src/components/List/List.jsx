@@ -28,7 +28,9 @@ export default class List extends Component {
   }
 
   state = {
-    newCard: false
+    newCard: false,
+    topBorder: false,
+    bottomBorder: false
   }
 
   componentDidMount() {
@@ -36,14 +38,23 @@ export default class List extends Component {
     dispatch(fetchList(id))
   }
 
+  componentDidUpdate() {
+    this.updateListState()
+  }
+
   render() {
     const { cards } = this.props
     return (
-      <div className={classNames("List", { empty: !cards.length })}>
+      <div className={classNames({
+        List: true,
+        empty: !cards.length,
+        "top-border": this.state.topBorder,
+        "bottom-border": this.state.bottomBorder
+      })}>
         <header>
           {this.props.title}
         </header>
-        <ul>
+        <ul ref="cards" onScroll={this.handleCardsScroll}>
           {
             cards.map(card => {
               if (!card) return null
@@ -58,7 +69,11 @@ export default class List extends Component {
         </ul>
         {(() => {
           if (!this.state.newCard) {
-            return <button type="button" onClick={this.handleAddClick} />
+            return (
+              <footer>
+                <button type="button" onClick={this.handleAddClick} />
+              </footer>
+            )
           }
         })()}
       </div>
@@ -78,6 +93,22 @@ export default class List extends Component {
     })
     if (title) {
       dispatch(createCard(id, title))
+    }
+  }
+
+  handleCardsScroll = () => {
+    this.updateListState()
+  }
+
+  updateListState = () => {
+    const { cards } = this.refs
+    const topBorder = cards.scrollTop > 0
+    const bottomBorder = cards.scrollTop + cards.offsetHeight < cards.scrollHeight
+    if (topBorder !== this.state.topBorder || bottomBorder !== this.state.bottomBorder) {
+      this.setState({
+        topBorder,
+        bottomBorder
+      })
     }
   }
 
