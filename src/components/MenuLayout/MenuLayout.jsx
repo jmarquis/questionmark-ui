@@ -26,7 +26,6 @@ export default class MenuLayout extends Component {
     return (
       <div className="MenuLayout">
         <Menu />
-        <Match pattern="/signout" component={SignOut} />
         <Match pattern="/:workspaceId" component={Workspace} />
       </div>
     )

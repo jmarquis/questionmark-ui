@@ -13,32 +13,6 @@
   justify-content: center;
   padding-bottom: 10vh;
 
-  &.layout-enter {
-    transform: scale(.95);
-    opacity: 0;
-  }
-
-  &.layout-enter-active {
-    transition:
-      transform .5s ease-in-out,
-      opacity .5s ease-in-out;
-    transform: none;
-    opacity: 1;
-  }
-
-  &.layout-leave {
-    transform: none;
-    opacity: 1;
-  }
-
-  &.layout-leave-active {
-    transition:
-      transform .5s ease-in-out,
-      opacity .5s ease-in-out;
-    transform: scale(.95);
-    opacity: 0;
-  }
-
   > figure {
     margin: 0 0 50px;
     width: 80px;

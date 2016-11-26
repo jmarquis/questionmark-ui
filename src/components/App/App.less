@@ -6,17 +6,64 @@
   background-color: @color-7;
   position: relative;
 
-  > * {
-    z-index: 2;
-  }
-
   > .layout-leave {
-    z-index: 1;
     opacity: 1;
     transition: opacity .5s ease-out;
   }
 
   > .layout-leave-active {
     opacity: 0;
+  }
+
+  > .MenuLayout {
+    z-index: 5;
+
+    &.layout-enter {
+      opacity: 0;
+      transition: opacity .5s ease-out;
+    }
+
+    &.layout-enter-active {
+      opacity: 1;
+    }
+
+    &.layout-leave {
+      opacity: 1;
+      transition: opacity .5s ease-out;
+    }
+
+    &.layout-leave-active {
+      opacity: 0;
+    }
+  }
+
+  > .Authentication {
+    z-index: 10;
+
+    &.layout-enter {
+      transform: scale(.95);
+      opacity: 0;
+      transition:
+        transform .5s ease-in-out,
+        opacity .5s ease-in-out;
+    }
+
+    &.layout-enter-active {
+      transform: none;
+      opacity: 1;
+    }
+
+    &.layout-leave {
+      transform: none;
+      opacity: 1;
+      transition:
+        transform .5s ease-in-out,
+        opacity .5s ease-in-out;
+    }
+
+    &.layout-leave-active {
+      transform: scale(.95);
+      opacity: 0;
+    }
   }
 }

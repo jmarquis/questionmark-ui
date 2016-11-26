@@ -4,6 +4,8 @@ import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import { Match } from "react-router"
 
+import { endSession } from "actions/user"
+
 import ProjectList from "ProjectList"
 
 @connect(state => {
@@ -16,7 +18,8 @@ export default class Menu extends Component {
 
   static propTypes = {
     location: PropTypes.object,
-    user: PropTypes.any
+    user: PropTypes.any,
+    dispatch: PropTypes.func
   }
 
   render() {
@@ -31,11 +34,16 @@ export default class Menu extends Component {
 
         <footer>
           <figure></figure>
-          Jeremy Marquis
+          <a onClick={this.handleSignoutClick}>Jeremy Marquis</a>
         </footer>
 
       </div>
     )
+  }
+
+  handleSignoutClick = () => {
+    const { dispatch } = this.props
+    dispatch(endSession())
   }
 
 }
