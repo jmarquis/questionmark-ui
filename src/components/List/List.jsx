@@ -6,9 +6,11 @@ import classNames from "classnames"
 
 import { fetchList, createCard } from "../../actions/lists"
 
+import IconButton from "IconButton"
 import Card from "Card"
 
 import PlusIcon from "plus"
+import PencilIcon from "pencil"
 
 @connect((state, ownProps) => {
   const { id } = ownProps
@@ -29,6 +31,7 @@ export default class List extends Component {
   }
 
   state = {
+    editing: false,
     newCard: false,
     topBorder: false,
     bottomBorder: false
@@ -45,15 +48,22 @@ export default class List extends Component {
 
   render() {
     const { cards } = this.props
+    const { editing } = this.state
     return (
-      <div className={classNames({
-        List: true,
-        empty: !cards.length,
-        "top-border": this.state.topBorder,
-        "bottom-border": this.state.bottomBorder
-      })}>
+      <div
+        className={classNames("List", {
+          empty: !cards.length,
+          "top-border": this.state.topBorder,
+          "bottom-border": this.state.bottomBorder
+        })}
+      >
         <header>
-          {this.props.title}
+          <input
+            type="text"
+            readOnly={!editing}
+            value={this.props.title}
+          />
+          <IconButton onClick={this.handleEditClick}><PencilIcon /></IconButton>
         </header>
         <ul ref="cards" onScroll={this.handleCardsScroll}>
           {
