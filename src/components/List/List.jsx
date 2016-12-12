@@ -11,6 +11,7 @@ import Card from "Card"
 
 import PlusIcon from "plus"
 import PencilIcon from "pencil"
+import XIcon from "x"
 
 @connect((state, ownProps) => {
   const { id } = ownProps
@@ -53,17 +54,25 @@ export default class List extends Component {
       <div
         className={classNames("List", {
           empty: !cards.length,
+          editing,
           "top-border": this.state.topBorder,
           "bottom-border": this.state.bottomBorder
         })}
       >
         <header>
-          <input
-            type="text"
-            readOnly={!editing}
-            value={this.props.title}
-          />
-          <IconButton onClick={this.handleEditClick}><PencilIcon /></IconButton>
+          <div>
+            <input
+              type="text"
+              readOnly={!editing}
+              value={this.props.title}
+            />
+            <IconButton onClick={this.handleEditClick}>
+              { editing ? <XIcon /> : <PencilIcon /> }
+            </IconButton>
+          </div>
+          <ul className="menu">
+            <li><a onClick={this.handleArchiveClick}>Archive list</a></li>
+          </ul>
         </header>
         <ul ref="cards" onScroll={this.handleCardsScroll}>
           {
@@ -96,6 +105,13 @@ export default class List extends Component {
   handleAddClick = () => {
     this.setState({
       newCard: true
+    })
+  }
+
+  handleEditClick = () => {
+    const { editing } = this.state
+    this.setState({
+      editing: !editing
     })
   }
 

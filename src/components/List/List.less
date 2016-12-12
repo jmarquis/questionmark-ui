@@ -7,31 +7,58 @@
 
   > header {
     flex: none;
-    height: 50px;
-    padding: 12px 20px 0;
+    padding: 11px 20px 15px;
     margin: 0 10px;
     position: relative;
-    display: flex;
-    align-items: flex-start;
 
-    > input {
-      flex: auto;
-      font-weight: 700;
-      border: 0;
-      padding: 0;
-      background-color: transparent;
-      line-height: 1;
+    > div {
+      display: flex;
+
+      > input {
+        flex: auto;
+        font-weight: 700;
+        border: 0;
+        padding: 0;
+        background-color: transparent;
+        line-height: 1;
+      }
+
+      > .IconButton {
+        flex: none;
+        width: 42px;
+        height: 42px;
+        visibility: hidden;
+      }
     }
 
-    > .IconButton {
-      flex: none;
-      width: 42px;
-      height: 42px;
-      visibility: hidden;
-    }
-
-    &:hover > .IconButton {
+    &:hover > div > .IconButton {
       visibility: visible;
+    }
+
+    > .menu {
+      max-height: 0;
+      overflow: hidden;
+      transition:
+        max-height .15s ease-in-out,
+        margin .15s ease-in-out,
+        opacity .15s ease-in-out;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      list-style: none;
+    }
+  }
+
+  &.editing > header {
+
+    > div > .IconButton {
+      visibility: visible;
+    }
+
+    > .menu {
+      max-height: 100px;
+      margin: 19px 0 10px;
+      opacity: 1;
     }
   }
 
