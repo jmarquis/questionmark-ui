@@ -6,7 +6,7 @@
     "build": "./node_modules/.bin/webpack --progress --colors",
     "clean": "rm -rf build",
     "rebuild": "npm run clean && npm run build",
-    "start": "./node_modules/.bin/webpack-dev-server --progress --content-base build/ --port 4200 --inline --hot --history-api-fallback"
+    "start": "./node_modules/.bin/webpack-dev-server --progress --content-base build/ --port 3000 --inline --hot --history-api-fallback"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
@@ -24,7 +24,7 @@
     "file-loader": "^0.9.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "postcss-import": "^8.1.2",
+    "postcss-import": "^9.0.0",
     "postcss-loader": "^1.0.0",
     "react-hot-loader": "^3.0.0-beta.5",
     "react-svg-loader": "^1.1.1",
@@ -38,6 +38,8 @@
     "normalize.css": "^5.0.0",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^4.0.0-alpha.3",

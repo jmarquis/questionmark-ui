@@ -100,6 +100,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, "build"),
+    publicPath: "http://localhost:3000/",
     filename: `${pkg.name}.js`
   },
 

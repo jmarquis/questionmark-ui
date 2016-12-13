@@ -19,7 +19,7 @@ render(
 
 if (module.hot) {
   module.hot.accept("./components/Root", () => {
-    const HotRoot = require("Root").default
+    const HotRoot = require("./components/Root").default
     render(
       <AppContainer>
         <HotRoot store={store} />
