@@ -10,11 +10,11 @@
 
   > .layout-leave {
     opacity: 1;
-    transition: opacity @layout-transition-time ease-out;
-  }
 
-  > .layout-leave-active {
-    opacity: 0;
+    > .layout-leave-active {
+      opacity: 0;
+      transition: opacity @layout-transition-time ease-out;
+    }
   }
 
   > .MenuLayout {
@@ -22,20 +22,20 @@
 
     &.layout-enter {
       opacity: 0;
-      transition: opacity @layout-transition-time ease-out;
-    }
 
-    &.layout-enter-active {
-      opacity: 1;
+      &.layout-enter-active {
+        opacity: 1;
+        transition: opacity @layout-transition-time ease-out;
+      }
     }
 
     &.layout-leave {
       opacity: 1;
-      transition: opacity @layout-transition-time ease-out;
-    }
 
-    &.layout-leave-active {
-      opacity: 0;
+      &.layout-leave-active {
+        opacity: 0;
+        transition: opacity @layout-transition-time ease-out;
+      }
     }
   }
 
@@ -45,27 +45,27 @@
     &.layout-enter {
       transform: scale(.95);
       opacity: 0;
-      transition:
-        transform @layout-transition-time ease-in-out,
-        opacity @layout-transition-time ease-in-out;
-    }
 
-    &.layout-enter-active {
-      transform: none;
-      opacity: 1;
+      &.layout-enter-active {
+        transform: none;
+        opacity: 1;
+        transition:
+          transform @layout-transition-time ease-in-out,
+          opacity @layout-transition-time ease-in-out;
+      }
     }
 
     &.layout-leave {
       transform: none;
       opacity: 1;
-      transition:
-        transform @layout-transition-time ease-in-out,
-        opacity @layout-transition-time ease-in-out;
-    }
 
-    &.layout-leave-active {
-      transform: scale(.95);
-      opacity: 0;
+      &.layout-leave-active {
+        transform: scale(.95);
+        opacity: 0;
+        transition:
+          transform @layout-transition-time ease-in-out,
+          opacity @layout-transition-time ease-in-out;
+      }
     }
   }
 }
