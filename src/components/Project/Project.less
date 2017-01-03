@@ -2,7 +2,14 @@
 
 .Project {
   flex: auto;
-  padding: 20px 10px 0;
+  padding: 24px;
   display: flex;
   background-color: @color-2;
+
+  > .List {
+
+    & + .List {
+      margin-left: 16px;
+    }
+  }
 }

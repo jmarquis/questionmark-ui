@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->
-    <title>Group</title>
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="View-Concepts" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Project-View-(alt)" transform="translate(-814.000000, -34.000000)" fill="currentColor">
-            <g id="Group" transform="translate(814.000000, 34.000000)">
-                <path d="M0.234066667,15.3964667 C0.2074,15.5084667 0.2414,15.6264667 0.322733333,15.7084667 C0.402066667,15.7871333 0.5174,15.8244667 0.634733333,15.7971333 L4.9454,14.7864667 C4.97406667,14.7798 5.0014,14.7684667 5.02673333,14.7551333 L1.27606667,11.0044667 C1.26273333,11.0298 1.2514,11.0571333 1.2454,11.0858 L0.234066667,15.3964667 Z" id="Fill-119"></path>
-                <polygon id="Fill-121" points="14.3271333 5.47526667 14.7984667 5.00393333 11.0271333 1.2326 10.5558 1.70393333"></polygon>
-                <polygon id="Fill-123" points="5.50846667 14.2936 13.8558 5.94626667 10.0844667 2.1756 1.73713333 10.5229333"></polygon>
-                <path d="M15.2698667,4.53253333 L15.5058667,4.29653333 C16.1552,3.6472 16.1552,2.58986667 15.5058667,1.93986667 L14.0912,0.526533333 C13.7765333,0.210533333 13.3578667,0.0372 12.9132,0.0372 C12.4678667,0.0372 12.0492,0.210533333 11.7345333,0.526533333 L11.4985333,0.7612 L15.2698667,4.53253333 Z" id="Fill-125"></path>
-            </g>
+    <g id="v3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPad-Landscape" transform="translate(-468.000000, -100.000000)" fill="currentColor">
+            <path d="M472.750667,115.042667 L468,116 L468.958667,111.25 L472.750667,115.042667 L472.750667,115.042667 Z M469.901333,110.306667 L473.693333,114.099333 L484,103.792667 L480.207333,100 L469.901333,110.306667 L469.901333,110.306667 Z" id="Shape"></path>
         </g>
     </g>
 </svg>

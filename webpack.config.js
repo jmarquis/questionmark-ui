@@ -42,10 +42,7 @@ module.exports = {
       {
         test: /\.html?$/,
         include: src,
-        use: "file-loader",
-        options: {
-          name: "index.html" // ugh
-        }
+        use: "file-loader"
       },
 
       {

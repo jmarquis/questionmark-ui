@@ -9,11 +9,16 @@ export default class Card extends Component {
   static propTypes = {
     title: PropTypes.string,
     editing: PropTypes.bool,
-    onBlur: PropTypes.func
+    placeholder: PropTypes.string,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onEnter: PropTypes.func,
+    onTab: PropTypes.func
   }
 
   state = {
-    title: this.props.title
+    title: this.props.title,
+    focus: false
   }
 
   componentDidMount() {
@@ -26,8 +31,9 @@ export default class Card extends Component {
 
   render() {
     const { editing } = this.props
+    const { focus } = this.state
     return (
-      <li className={classNames("Card", { editing })}>
+      <li className={classNames("Card", { editing, focus })}>
         <textarea
           ref="textarea"
           rows={1}
@@ -35,17 +41,46 @@ export default class Card extends Component {
           value={this.state.title}
           onKeyDown={this.handleKeyDown}
           onChange={this.handleTitleChange}
-          autoFocus={this.props.editing}
+          onFocus={this.handleFocus}
           onBlur={this.handleBlur}
+          placeholder={this.props.placeholder}
         />
       </li>
     )
   }
 
+  handleFocus = event => {
+    if (this.props.editing) {
+      this.setState({ focus: true })
+      if (this.props.onFocus) {
+        this.props.onFocus({ event, state: this.state })
+      }
+    }
+  }
+
+  handleBlur = event => {
+    if (this.props.editing) {
+      this.setState({ focus: false })
+      if (this.props.onBlur) {
+        this.props.onBlur({ event, state: this.state })
+      }
+    }
+  }
+
   handleKeyDown = event => {
-    if (this.props.editing && event.keyCode === 13) {
-      event.preventDefault()
-      this.refs.textarea.blur()
+    if (this.props.editing) {
+      switch (event.keyCode) {
+        case 13:
+          event.preventDefault()
+          this.refs.textarea.blur()
+          this.handleEnter(event)
+          break
+        case 9:
+          event.preventDefault()
+          this.refs.textarea.blur()
+          this.handleTab(event)
+          break
+      }
     }
   }
 
@@ -55,9 +90,15 @@ export default class Card extends Component {
     })
   }
 
-  handleBlur = () => {
-    if (this.props.editing) {
-      this.props.onBlur(this.state.title)
+  handleEnter = event => {
+    if (this.props.editing && this.props.onEnter) {
+      this.props.onEnter({ event, state: this.state })
+    }
+  }
+
+  handleTab = event => {
+    if (this.props.editing && this.props.onTab) {
+      this.props.onTab({ event, state: this.state })
     }
   }
 

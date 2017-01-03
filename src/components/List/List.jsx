@@ -9,7 +9,6 @@ import { fetchList, createCard } from "../../actions/lists"
 import IconButton from "IconButton"
 import Card from "Card"
 
-import PlusIcon from "plus"
 import PencilIcon from "pencil"
 import XIcon from "x"
 
@@ -32,19 +31,12 @@ export default class List extends Component {
   }
 
   state = {
-    editing: false,
-    newCard: false,
-    topBorder: false,
-    bottomBorder: false
+    editing: false
   }
 
   componentDidMount() {
     const { dispatch, id } = this.props
     dispatch(fetchList(id))
-  }
-
-  componentDidUpdate() {
-    this.updateListState()
   }
 
   render() {
@@ -54,50 +46,36 @@ export default class List extends Component {
       <div
         className={classNames("List", {
           empty: !cards.length,
-          editing,
-          "top-border": this.state.topBorder,
-          "bottom-border": this.state.bottomBorder
+          editing
         })}
       >
         <header>
-          <div>
-            <input
-              type="text"
-              readOnly={!editing}
-              value={this.props.title}
-            />
-            <IconButton onClick={this.handleEditClick}>
-              { editing ? <XIcon /> : <PencilIcon /> }
-            </IconButton>
-          </div>
-          <ul className="menu">
-            <li><a onClick={this.handleArchiveClick}>Archive list</a></li>
-          </ul>
+          <input
+            type="text"
+            readOnly={!editing}
+            value={this.props.title}
+          />
+          <IconButton onClick={this.handleEditClick}>
+            { editing ? <XIcon /> : <PencilIcon /> }
+          </IconButton>
         </header>
-        <ul ref="cards" onScroll={this.handleCardsScroll}>
+        <ul>
           {
             cards.map(card => {
               if (!card) return null
               return <Card key={card.id} title={card.title} />
             })
           }
-          {(() => {
-            if (this.state.newCard) {
-              return <Card editing={true} onBlur={this.handleNewCardBlur} />
-            }
-          })()}
         </ul>
-        {(() => {
-          if (!this.state.newCard) {
-            return (
-              <footer>
-                <button type="button" onClick={this.handleAddClick}>
-                  <PlusIcon />
-                </button>
-              </footer>
-            )
-          }
-        })()}
+        <footer>
+          <ul>
+            <Card
+              editing={true}
+              placeholder="+ new card"
+              onEnter={this.handleNewCardEnter}
+            />
+          </ul>
+        </footer>
       </div>
     )
   }
@@ -115,29 +93,10 @@ export default class List extends Component {
     })
   }
 
-  handleNewCardBlur = title => {
+  handleNewCardEnter = ({ state }) => {
     const { dispatch, id } = this.props
-    this.setState({
-      newCard: false
-    })
-    if (title) {
-      dispatch(createCard(id, title))
-    }
-  }
-
-  handleCardsScroll = () => {
-    this.updateListState()
-  }
-
-  updateListState = () => {
-    const { cards } = this.refs
-    const topBorder = cards.scrollTop > 0
-    const bottomBorder = cards.scrollTop + cards.offsetHeight < cards.scrollHeight
-    if (topBorder !== this.state.topBorder || bottomBorder !== this.state.bottomBorder) {
-      this.setState({
-        topBorder,
-        bottomBorder
-      })
+    if (state.title) {
+      dispatch(createCard(id, state.title))
     }
   }
 
