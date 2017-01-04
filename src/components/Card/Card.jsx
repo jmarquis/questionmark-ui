@@ -10,6 +10,7 @@ export default class Card extends Component {
     title: PropTypes.string,
     editing: PropTypes.bool,
     placeholder: PropTypes.string,
+    onTitleChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onEnter: PropTypes.func,
@@ -17,7 +18,6 @@ export default class Card extends Component {
   }
 
   state = {
-    title: this.props.title,
     focus: false
   }
 
@@ -30,7 +30,7 @@ export default class Card extends Component {
   }
 
   render() {
-    const { editing } = this.props
+    const { editing, title } = this.props
     const { focus } = this.state
     return (
       <li className={classNames("Card", { editing, focus })}>
@@ -38,7 +38,7 @@ export default class Card extends Component {
           ref="textarea"
           rows={1}
           readOnly={!editing}
-          value={this.state.title}
+          value={title}
           onKeyDown={this.handleKeyDown}
           onChange={this.handleTitleChange}
           onFocus={this.handleFocus}
@@ -53,7 +53,7 @@ export default class Card extends Component {
     if (this.props.editing) {
       this.setState({ focus: true })
       if (this.props.onFocus) {
-        this.props.onFocus({ event, state: this.state })
+        this.props.onFocus(event)
       }
     }
   }
@@ -62,7 +62,7 @@ export default class Card extends Component {
     if (this.props.editing) {
       this.setState({ focus: false })
       if (this.props.onBlur) {
-        this.props.onBlur({ event, state: this.state })
+        this.props.onBlur(event)
       }
     }
   }
@@ -85,21 +85,23 @@ export default class Card extends Component {
   }
 
   handleTitleChange = event => {
-    this.setState({
-      title: event.target.value.replace(/\n/g, "")
-    })
+    this.props.onTitleChange(event.target.value)
   }
 
   handleEnter = event => {
     if (this.props.editing && this.props.onEnter) {
-      this.props.onEnter({ event, state: this.state })
+      this.props.onEnter(event)
     }
   }
 
   handleTab = event => {
     if (this.props.editing && this.props.onTab) {
-      this.props.onTab({ event, state: this.state })
+      this.props.onTab(event)
     }
+  }
+
+  focus = () => {
+    this.refs.textarea.focus()
   }
 
 }

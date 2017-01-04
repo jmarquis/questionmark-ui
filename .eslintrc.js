@@ -24,7 +24,7 @@ module.exports = {
 
     "arrow-spacing": "warn",
     "block-spacing": "warn",
-    "brace-style": "warn",
+    "brace-style": ["warn", "1tbs", { allowSingleLine: true }],
     "camelcase": "warn",
     "comma-spacing": "warn",
     "computed-property-spacing": "warn",
