@@ -17,7 +17,7 @@ import XIcon from "x"
   const { cards, lists: { [id]: list } } = state
   return {
     cards: list ? list.card_ids.map(cardId => {
-      return typeof cardId === "number" ? cards[cardId] : cardId
+      return cards[cardId]
     }) : []
   }
 })
@@ -42,14 +42,17 @@ export default class List extends Component {
   componentDidUpdate(prevProps) {
     const { cards: prevCards } = prevProps
     const { cards } = this.props
-    console.log(prevCards, cards)
-    if (prevCards[prevCards.length - 1].id !== cards[cards.length - 1].id) {
-      this.list.scrollTop = this.list.scrollHeight
+    if (prevCards && prevCards.length && cards && cards.length) {
+      const prevLastCard = prevCards[prevCards.length - 1]
+      const lastCard = cards[cards.length - 1]
+      if (prevLastCard && lastCard && prevLastCard.id !== lastCard.id) {
+        this.list.scrollTop = this.list.scrollHeight
+      }
     }
   }
 
   render() {
-    const { cards } = this.props
+    const { id, cards } = this.props
     const { editing, newCardTitle } = this.state
     return (
       <div
@@ -75,6 +78,8 @@ export default class List extends Component {
               return (
                 <Card
                   key={card.id}
+                  id={card.id}
+                  listId={id}
                   title={card.title}
                 />
               )

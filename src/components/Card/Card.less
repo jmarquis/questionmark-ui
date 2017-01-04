@@ -6,6 +6,7 @@
   border-radius: 3px;
   padding: 7px 11px 4px;
   margin: 0;
+  position: relative;
 
   &:hover {
     background-color: @color-1;
@@ -15,6 +16,25 @@
   &.editing.focus {
     background-color: @color-1;
     border: 1px solid @color-5;
+  }
+
+  &.is-dragging {
+    opacity: .1;
+  }
+
+  &.is-over:not(.is-dragging) {
+    margin-top: 55px !important;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -47px;
+      right: 0;
+      left: 0;
+      height: 39px;
+      border: 3px dashed @color-5;
+      border-radius: 3px;
+    }
   }
 
   > textarea {

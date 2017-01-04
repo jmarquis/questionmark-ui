@@ -3,6 +3,8 @@ import "./App.less"
 import React, { Component, PropTypes } from "react"
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"
 import { connect } from "react-redux"
+import { DragDropContext } from "react-dnd"
+import HTML5Backend from "react-dnd-html5-backend"
 
 import { fetchUser } from "../../actions/user"
 
@@ -16,6 +18,7 @@ import Authentication from "Authentication"
     user
   }
 })
+@DragDropContext(HTML5Backend)
 export default class App extends Component {
 
   static propTypes = {

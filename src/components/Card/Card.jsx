@@ -1,20 +1,50 @@
 import "./Card.less"
 
 import React, { Component, PropTypes } from "react"
+import { connect } from "react-redux"
 import autosize from "autosize"
 import classNames from "classnames"
+import { DragSource, DropTarget } from "react-dnd"
 
+import { moveCard } from "actions/cards"
+
+@connect()
+@DragSource("CARD", {
+  beginDrag(props) {
+    return {
+      cardId: props.id
+    }
+  }
+}, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))
+@DropTarget("CARD", {
+  drop(props, monitor) {
+    const { dispatch } = props
+    dispatch(moveCard(monitor.getItem().cardId, props.listId))
+  }
+}, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop()
+}))
 export default class Card extends Component {
 
   static propTypes = {
     title: PropTypes.string,
+    listId: PropTypes.number,
     editing: PropTypes.bool,
     placeholder: PropTypes.string,
     onTitleChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onEnter: PropTypes.func,
-    onTab: PropTypes.func
+    onTab: PropTypes.func,
+    connectDragSource: PropTypes.func,
+    connectDropTarget: PropTypes.func,
+    isDragging: PropTypes.bool,
+    isOver: PropTypes.bool
   }
 
   state = {
@@ -30,10 +60,24 @@ export default class Card extends Component {
   }
 
   render() {
-    const { editing, title } = this.props
+    const {
+      connectDragSource,
+      connectDropTarget,
+      isDragging,
+      isOver,
+      editing,
+      title
+    } = this.props
     const { focus } = this.state
-    return (
-      <li className={classNames("Card", { editing, focus })}>
+    return connectDragSource(connectDropTarget(
+      <li
+        className={classNames("Card", {
+          editing,
+          focus,
+          "is-dragging": isDragging,
+          "is-over": isOver
+        })}
+      >
         <textarea
           ref="textarea"
           rows={1}
@@ -46,7 +90,7 @@ export default class Card extends Component {
           placeholder={this.props.placeholder}
         />
       </li>
-    )
+    ))
   }
 
   handleFocus = event => {
