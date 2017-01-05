@@ -80,17 +80,30 @@
     border: 1px solid @color-4;
     border-radius: 0 0 3px 3px;
 
-    > ul {
-      list-style: none;
-      padding: 0;
+    > textarea {
+      border: 1px solid @color-4;
+      border-radius: 3px;
       margin: 0;
+      padding: 7px 11px 9px;
+      outline: 0;
+      background-color: transparent;
+      resize: none;
+      height: 1px;
+      width: 100%;
+      line-height: 1.5;
+      vertical-align: bottom;
 
-      > .Card {
-        background-color: transparent !important;
+      &:hover,
+      &:focus {
+        border-color: @color-5;
+      }
 
-        > textarea {
-          color: @color-6;
-        }
+      &::-webkit-input-placeholder {
+        color: @color-5;
+      }
+
+      &::placeholder {
+        color: @color-5;
       }
     }
   }

@@ -44,7 +44,8 @@ export default class Card extends Component {
     connectDragSource: PropTypes.func,
     connectDropTarget: PropTypes.func,
     isDragging: PropTypes.bool,
-    isOver: PropTypes.bool
+    isOver: PropTypes.bool,
+    onClick: PropTypes.func
   }
 
   state = {
@@ -52,11 +53,11 @@ export default class Card extends Component {
   }
 
   componentDidMount() {
-    autosize(this.refs.textarea)
+    autosize(this.textarea)
   }
 
   componentWillUnmount() {
-    autosize.destroy(this.refs.textarea)
+    autosize.destroy(this.textarea)
   }
 
   render() {
@@ -66,7 +67,8 @@ export default class Card extends Component {
       isDragging,
       isOver,
       editing,
-      title
+      title,
+      onClick
     } = this.props
     const { focus } = this.state
     return connectDragSource(connectDropTarget(
@@ -77,9 +79,10 @@ export default class Card extends Component {
           "is-dragging": isDragging,
           "is-over": isOver
         })}
+        onClick={onClick}
       >
         <textarea
-          ref="textarea"
+          ref={textarea => { this.textarea = textarea }}
           rows={1}
           readOnly={!editing}
           value={title}
@@ -116,12 +119,12 @@ export default class Card extends Component {
       switch (event.keyCode) {
         case 13:
           event.preventDefault()
-          this.refs.textarea.blur()
+          this.textarea.blur()
           this.handleEnter(event)
           break
         case 9:
           event.preventDefault()
-          this.refs.textarea.blur()
+          this.textarea.blur()
           this.handleTab(event)
           break
       }
@@ -145,7 +148,7 @@ export default class Card extends Component {
   }
 
   focus = () => {
-    this.refs.textarea.focus()
+    this.textarea.focus()
   }
 
 }

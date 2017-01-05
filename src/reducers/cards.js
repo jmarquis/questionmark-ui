@@ -14,6 +14,12 @@ export function cards(state = {}, action) {
         [action.card.id]: action.card
       }
 
+    case "DELETE_CARD": {
+      const newState = { ...state }
+      delete newState[action.cardId]
+      return newState
+    }
+
     default:
       return state
 

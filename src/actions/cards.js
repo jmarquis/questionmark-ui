@@ -1,4 +1,4 @@
-import { put } from "../etc/request"
+import { put, destroy } from "../etc/request"
 
 export function moveCard(cardId, listId) {
   return dispatch => {
@@ -12,6 +12,17 @@ export function moveCard(cardId, listId) {
         cards: {
           [card.id]: card
         }
+      })
+    })
+  }
+}
+
+export function deleteCard(cardId) {
+  return dispatch => {
+    destroy(`cards/${cardId}`).then(() => {
+      dispatch({
+        type: "DELETE_CARD",
+        cardId
       })
     })
   }

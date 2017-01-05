@@ -3,8 +3,10 @@ import "./List.less"
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import classNames from "classnames"
+import autosize from "autosize"
 
 import { fetchList, createCard } from "../../actions/lists"
+import { deleteCard } from "../../actions/cards"
 
 import IconButton from "IconButton"
 import Card from "Card"
@@ -37,6 +39,7 @@ export default class List extends Component {
   componentDidMount() {
     const { dispatch, id } = this.props
     dispatch(fetchList(id))
+    autosize(this.newCardInput)
   }
 
   componentDidUpdate(prevProps) {
@@ -49,6 +52,10 @@ export default class List extends Component {
         this.list.scrollTop = this.list.scrollHeight
       }
     }
+  }
+
+  componentWillUnmount() {
+    autosize.destroy(this.newCardInput)
   }
 
   render() {
@@ -81,23 +88,21 @@ export default class List extends Component {
                   id={card.id}
                   listId={id}
                   title={card.title}
+                  onClick={() => this.handleCardClick(card.id)}
                 />
               )
             })
           }
         </ul>
         <footer>
-          <ul>
-            <Card
-              ref={card => { this.newCard = card }}
-              editing={true}
-              placeholder="+ new card"
-              title={newCardTitle}
-              onTitleChange={this.handleNewCardTitleChange}
-              onEnter={this.handleNewCardEnterOrTab}
-              onTab={this.handleNewCardEnterOrTab}
-            />
-          </ul>
+          <textarea
+            ref={textarea => { this.newCardInput = textarea }}
+            rows={1}
+            placeholder="+ new card"
+            value={newCardTitle}
+            onChange={this.handleNewCardTitleChange}
+            onKeyDown={this.handleNewCardInputKeyDown}
+          />
         </footer>
       </div>
     )
@@ -116,21 +121,29 @@ export default class List extends Component {
     })
   }
 
-  handleNewCardTitleChange = newCardTitle => {
-    this.setState({ newCardTitle })
+  handleNewCardTitleChange = event => {
+    this.setState({ newCardTitle: event.target.value })
   }
 
-  handleNewCardEnterOrTab = () => {
-    const { dispatch, id } = this.props
-    const { newCardTitle } = this.state
-    if (newCardTitle) {
-      dispatch(createCard(id, newCardTitle))
-      this.setState({
-        newCardTitle: ""
-      }, () => {
-        this.newCard.focus()
-      })
+  handleNewCardInputKeyDown = event => {
+    if (event.keyCode === 13 || event.keyCode === 9) {
+      event.preventDefault()
+      const { dispatch, id } = this.props
+      const { newCardTitle } = this.state
+      if (newCardTitle) {
+        dispatch(createCard(id, newCardTitle))
+        this.setState({
+          newCardTitle: ""
+        }, () => {
+          autosize.update(this.newCardInput)
+        })
+      }
     }
+  }
+
+  handleCardClick = (cardId) => {
+    const { dispatch } = this.props
+    dispatch(deleteCard(cardId))
   }
 
 }
