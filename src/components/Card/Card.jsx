@@ -10,20 +10,24 @@ import { moveCard } from "actions/cards"
 
 @connect()
 @DragSource("CARD", {
+
   beginDrag(props) {
     return {
       cardId: props.id
     }
   }
+
 }, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
 }))
 @DropTarget("CARD", {
+
   drop(props, monitor) {
-    const { dispatch } = props
-    dispatch(moveCard(monitor.getItem().cardId, props.listId))
+    const { dispatch, listId, position } = props
+    dispatch(moveCard(monitor.getItem().cardId, listId, position))
   }
+
 }, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
@@ -34,6 +38,7 @@ export default class Card extends Component {
   static propTypes = {
     title: PropTypes.string,
     listId: PropTypes.number,
+    position: PropTypes.number,
     editing: PropTypes.bool,
     placeholder: PropTypes.string,
     onTitleChange: PropTypes.func,

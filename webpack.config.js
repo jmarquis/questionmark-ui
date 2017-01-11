@@ -22,6 +22,7 @@ module.exports = {
       path.resolve("./src/components"),
       path.resolve("./src/styles"),
       path.resolve("./src/icons"),
+      path.resolve("./src/etc"),
       path.resolve("./src"),
       "node_modules"
     ]

@@ -17,10 +17,12 @@ import XIcon from "x"
 @connect((state, ownProps) => {
   const { id } = ownProps
   const { cards, lists: { [id]: list } } = state
+  const listCards = list ? list.card_ids.map(cardId => cards[cardId]) : []
+  const sortedListCards = list ? listCards.sort((cardA, cardB) => {
+    return cardA.position - cardB.position
+  }) : []
   return {
-    cards: list ? list.card_ids.map(cardId => {
-      return cards[cardId]
-    }) : []
+    cards: sortedListCards
   }
 })
 export default class List extends Component {
@@ -86,6 +88,7 @@ export default class List extends Component {
                 <Card
                   key={card.id}
                   id={card.id}
+                  position={card.position}
                   listId={id}
                   title={card.title}
                   onClick={() => this.handleCardClick(card.id)}
